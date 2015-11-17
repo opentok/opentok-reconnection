@@ -48,14 +48,14 @@ public class MainActivity extends Activity {
 
     private boolean resumeHasRun = false;
 
+    private SessionListener mSessionListener;
+    private SubscriberListener mSubscriberListener;
+    private PublisherListener mPublisherListener;
+
     private static final String SESSION_ID = "";
     private static final String TOKEN = "";
     private static final String APIKEY = "";
     private static final boolean SUBSCRIBE_TO_SELF = false;
-
-    private SessionListener mSessionListener;
-    private SubscriberListener mSubscriberListener;
-    private PublisherListener mPublisherListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
