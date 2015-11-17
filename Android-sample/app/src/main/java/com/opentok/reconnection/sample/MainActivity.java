@@ -1,6 +1,5 @@
 package com.opentok.reconnection.sample;
 
-import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,10 +30,7 @@ import com.opentok.android.SubscriberKit;
 import java.util.ArrayList;
 
 
-
-public class MainActivity extends Activity implements
-        Session.SessionListener, Session.ReconnectionListener, Publisher.PublisherListener,
-        Subscriber.VideoListener, Subscriber.StreamListener{
+public class MainActivity extends Activity {
 
     private static final String LOGTAG = "demo-reconnection";
     private Session mSession;
@@ -56,6 +52,10 @@ public class MainActivity extends Activity implements
     private static final String TOKEN = "";
     private static final String APIKEY = "";
     private static final boolean SUBSCRIBE_TO_SELF = false;
+
+    private SessionListener mSessionListener;
+    private SubscriberListener mSubscriberListener;
+    private PublisherListener mPublisherListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,44 +165,21 @@ public class MainActivity extends Activity implements
 
     private void sessionConnect() {
         if (mSession == null) {
+            mSessionListener = new SessionListener();
             mSession = new Session(MainActivity.this,
                     APIKEY, SESSION_ID);
-            mSession.setSessionListener(this);
+            mSession.setSessionListener(mSessionListener);
+            mSession.setReconnectionListener(mSessionListener);
             mSession.connect(TOKEN);
         }
     }
 
-    @Override
-    public void onConnected(Session session) {
-        Log.i(LOGTAG, "Connected to the session.");
-        if (mPublisher == null) {
-            mPublisher = new Publisher(MainActivity.this, "publisher");
-            mPublisher.setPublisherListener(this);
-            attachPublisherView(mPublisher);
-            mSession.publish(mPublisher);
-        }
-    }
-
-    @Override
-    public void onDisconnected(Session session) {
-        Log.i(LOGTAG, "Disconnected from the session.");
-        if (mPublisher != null) {
-            mPublisherViewContainer.removeView(mPublisher.getView());
-        }
-
-        if (mSubscriber != null) {
-            mSubscriberViewContainer.removeView(mSubscriber.getView());
-        }
-
-        mPublisher = null;
-        mSubscriber = null;
-        mStreams.clear();
-        mSession = null;
-    }
 
     private void subscribeToStream(Stream stream) {
+        mSubscriberListener =  new SubscriberListener();
         mSubscriber = new Subscriber(MainActivity.this, stream);
-        mSubscriber.setVideoListener(this);
+        mSubscriber.setVideoListener(mSubscriberListener);
+        mSubscriber.setStreamListener(mSubscriberListener);
         mSession.subscribe(mSubscriber);
 
         if (mSubscriber.getSubscribeToVideo()) {
@@ -244,107 +221,6 @@ public class MainActivity extends Activity implements
         layoutParams.bottomMargin = dpToPx(8);
         layoutParams.rightMargin = dpToPx(8);
         mPublisherViewContainer.addView(mPublisher.getView(), layoutParams);
-    }
-
-    @Override
-    public void onError(Session session, OpentokError exception) {
-        Log.i(LOGTAG, "Session exception: " + exception.getMessage());
-    }
-
-    @Override
-    public void onStreamReceived(Session session, Stream stream) {
-
-        if (!SUBSCRIBE_TO_SELF) {
-            mStreams.add(stream);
-            if (mSubscriber == null) {
-                subscribeToStream(stream);
-            }
-        }
-    }
-
-    @Override
-    public void onStreamDropped(Session session, Stream stream) {
-        if (!SUBSCRIBE_TO_SELF) {
-            if (mSubscriber != null) {
-                unsubscribeFromStream(stream);
-            }
-        }
-    }
-
-    @Override
-    public void onStreamCreated(PublisherKit publisher, Stream stream) {
-        if (SUBSCRIBE_TO_SELF) {
-            mStreams.add(stream);
-            if (mSubscriber == null) {
-                subscribeToStream(stream);
-            }
-        }
-    }
-
-    @Override
-    public void onStreamDestroyed(PublisherKit publisher, Stream stream) {
-        if ((SUBSCRIBE_TO_SELF && mSubscriber != null)) {
-            unsubscribeFromStream(stream);
-        }
-    }
-
-    @Override
-    public void onError(PublisherKit publisher, OpentokError exception) {
-        Log.i(LOGTAG, "Publisher exception: " + exception.getMessage());
-    }
-
-    @Override
-    public void onVideoDataReceived(SubscriberKit subscriber) {
-        Log.i(LOGTAG, "First frame received");
-
-        // stop loading spinning
-        mLoadingSub.setVisibility(View.GONE);
-        attachSubscriberView(mSubscriber);
-    }
-
-
-    @Override
-    public void onVideoDisabled(SubscriberKit subscriber, String reason) {
-        Log.i(LOGTAG,
-                "Video disabled:" + reason);
-    }
-
-    @Override
-    public void onVideoEnabled(SubscriberKit subscriber, String reason) {
-        Log.i(LOGTAG, "Video enabled:" + reason);
-    }
-
-    @Override
-    public void onVideoDisableWarning(SubscriberKit subscriber) {
-        Log.i(LOGTAG, "Video may be disabled soon due to network quality degradation. Add UI handling here.");
-    }
-
-    @Override
-    public void onVideoDisableWarningLifted(SubscriberKit subscriber) {
-        Log.i(LOGTAG, "Video may no longer be disabled as stream quality improved. Add UI handling here.");
-    }
-
-    @Override
-    public void onReconnecting(Session session) {
-        Log.i(LOGTAG, "Reconnecting the session "+session.getSessionId());
-        showReconnectionDialog(true);
-    }
-
-    @Override
-    public void onReconnected(Session session) {
-        Log.i(LOGTAG, "Session has been reconnected");
-        showReconnectionDialog(false);
-    }
-
-    @Override
-    public void onReconnected(SubscriberKit subscriberKit) {
-        Log.i(LOGTAG, "Subscriber has been reconnected");
-        Toast.makeText(MainActivity.this, "Subscriber has been reconnected", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onDisconnected(SubscriberKit subscriberKit) {
-        Log.i(LOGTAG, "Subscriber has been disconnected by connection error");
     }
 
     private void showReconnectionDialog(boolean show){
@@ -402,4 +278,148 @@ public class MainActivity extends Activity implements
             }
         }
     };
+
+    private class SessionListener implements Session.ReconnectionListener, Session.SessionListener {
+
+        @Override
+        public void onConnected(Session session) {
+            Log.i(LOGTAG, "Connected to the session.");
+            if (mPublisher == null) {
+                mPublisherListener = new PublisherListener();
+                mPublisher = new Publisher(MainActivity.this, "publisher");
+                mPublisher.setPublisherListener(mPublisherListener);
+                attachPublisherView(mPublisher);
+                mSession.publish(mPublisher);
+            }
+        }
+
+        @Override
+        public void onDisconnected(Session session) {
+            Log.i(LOGTAG, "Disconnected from the session.");
+            if (mPublisher != null) {
+                mPublisherViewContainer.removeView(mPublisher.getView());
+            }
+
+            if (mSubscriber != null) {
+                mSubscriberViewContainer.removeView(mSubscriber.getView());
+            }
+
+            mPublisher = null;
+            mSubscriber = null;
+            mStreams.clear();
+            mSession = null;
+        }
+
+        @Override
+        public void onReconnecting(Session session) {
+            Log.i(LOGTAG, "Reconnecting the session "+session.getSessionId());
+            showReconnectionDialog(true);
+        }
+
+        @Override
+        public void onReconnected(Session session) {
+            Log.i(LOGTAG, "Session has been reconnected");
+            showReconnectionDialog(false);
+        }
+
+
+        @Override
+        public void onError(Session session, OpentokError exception) {
+            Log.i(LOGTAG, "Session exception: " + exception.getMessage());
+        }
+
+        @Override
+        public void onStreamReceived(Session session, Stream stream) {
+
+            if (!SUBSCRIBE_TO_SELF) {
+                mStreams.add(stream);
+                if (mSubscriber == null) {
+                    subscribeToStream(stream);
+                }
+            }
+        }
+
+        @Override
+        public void onStreamDropped(Session session, Stream stream) {
+            if (!SUBSCRIBE_TO_SELF) {
+                if (mSubscriber != null) {
+                    unsubscribeFromStream(stream);
+                }
+            }
+        }
+    }
+
+    private class PublisherListener implements Publisher.PublisherListener {
+
+        @Override
+        public void onStreamCreated(PublisherKit publisher, Stream stream) {
+            if (SUBSCRIBE_TO_SELF) {
+                mStreams.add(stream);
+                if (mSubscriber == null) {
+                    subscribeToStream(stream);
+                }
+            }
+        }
+
+        @Override
+        public void onStreamDestroyed(PublisherKit publisher, Stream stream) {
+            if ((SUBSCRIBE_TO_SELF && mSubscriber != null)) {
+                unsubscribeFromStream(stream);
+            }
+        }
+
+        @Override
+        public void onError(PublisherKit publisher, OpentokError exception) {
+            Log.i(LOGTAG, "Publisher exception: " + exception.getMessage());
+        }
+
+    }
+
+    public class SubscriberListener implements Subscriber.VideoListener, Subscriber.StreamListener {
+
+        @Override
+        public void onVideoDataReceived(SubscriberKit subscriber) {
+            Log.i(LOGTAG, "First frame received");
+
+            // stop loading spinning
+            mLoadingSub.setVisibility(View.GONE);
+            attachSubscriberView(mSubscriber);
+        }
+
+
+        @Override
+        public void onVideoDisabled(SubscriberKit subscriber, String reason) {
+            Log.i(LOGTAG,
+                    "Video disabled:" + reason);
+        }
+
+        @Override
+        public void onVideoEnabled(SubscriberKit subscriber, String reason) {
+            Log.i(LOGTAG, "Video enabled:" + reason);
+        }
+
+        @Override
+        public void onVideoDisableWarning(SubscriberKit subscriber) {
+            Log.i(LOGTAG, "Video may be disabled soon due to network quality degradation. Add UI handling here.");
+        }
+
+        @Override
+        public void onVideoDisableWarningLifted(SubscriberKit subscriber) {
+            Log.i(LOGTAG, "Video may no longer be disabled as stream quality improved. Add UI handling here.");
+        }
+
+
+        @Override
+        public void onReconnected(SubscriberKit subscriberKit) {
+            Log.i(LOGTAG, "Subscriber has been reconnected");
+            Toast.makeText(MainActivity.this, "Subscriber has been reconnected", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onDisconnected(SubscriberKit subscriberKit) {
+            Log.i(LOGTAG, "Subscriber has been disconnected by connection error");
+        }
+
+    }
+
 }
