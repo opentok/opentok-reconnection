@@ -1,6 +1,12 @@
 package com.opentok.reconnection.sample;
 
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -53,7 +59,7 @@ public class MainActivity extends Activity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(LOGTAG, "ONCREATE");
+        Log.i(LOGTAG, "onCreate");
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
 
         super.onCreate(savedInstanceState);
@@ -104,13 +110,23 @@ public class MainActivity extends Activity implements
                 mSession.onResume();
             }
         }
-
         reloadInterface();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(mBatteryTracker, filter);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+
+        unregisterReceiver(mBatteryTracker);
 
         if (isFinishing()) {
             if (mSession != null) {
@@ -121,11 +137,9 @@ public class MainActivity extends Activity implements
 
     @Override
     public void onDestroy() {
-
         if (mSession != null) {
             mSession.disconnect();
         }
-
         super.onDestroy();
         finish();
     }
@@ -135,7 +149,6 @@ public class MainActivity extends Activity implements
         if (mSession != null) {
             mSession.disconnect();
         }
-
         super.onBackPressed();
     }
 
@@ -289,16 +302,6 @@ public class MainActivity extends Activity implements
         attachSubscriberView(mSubscriber);
     }
 
-    /**
-     * Converts dp to real pixels, according to the screen density.
-     *
-     * @param dp A number of density-independent pixels.
-     * @return The equivalent number of real pixels.
-     */
-    private int dpToPx(int dp) {
-        double screenDensity = this.getResources().getDisplayMetrics().density;
-        return (int) (screenDensity * (double) dp);
-    }
 
     @Override
     public void onVideoDisabled(SubscriberKit subscriber, String reason) {
@@ -361,4 +364,42 @@ public class MainActivity extends Activity implements
             builder.show();
         }
     }
+
+    /**
+     * Converts dp to real pixels, according to the screen density.
+     *
+     * @param dp A number of density-independent pixels.
+     * @return The equivalent number of real pixels.
+     */
+    private int dpToPx(int dp) {
+        double screenDensity = this.getResources().getDisplayMetrics().density;
+        return (int) (screenDensity * (double) dp);
+    }
+
+    /**
+     * BroadcastReceiver is used for receiving intents from the BatteryManager when the battery changed
+     */
+    private BroadcastReceiver mBatteryTracker = new BroadcastReceiver() {
+
+        public void onReceive(Context context, Intent batteryStatus) {
+
+            String action = batteryStatus.getAction();
+
+            // information received from BatteryManager
+            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+
+                int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+                int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+                float batteryUsePct = level / (float)scale;
+
+                //Send info about the battery consume
+                //if the session is reconnected at this moment, we will not send this info (retryAfterReconnection to false),
+                //because the battery consume will not be the same.
+                if (mSession != null ) {
+                    mSession.sendSignal("signal", String.valueOf(batteryUsePct), false);
+                }
+            }
+        }
+    };
 }
