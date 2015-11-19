@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>
+    <p>Session status: <span id="log">Not connected.</span>
+    <div id="videos">
+      <div id="publisher"></div>
+      <div id="subscribers"></div>
+    </div>
+
+    <p>Signal log: <button id="signalButton" onclick="sendSignal()">Send signal</button>
+    <div id="signals"></div>
+
+    <script src="https://static.opentok.com/v2/js/opentok.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>

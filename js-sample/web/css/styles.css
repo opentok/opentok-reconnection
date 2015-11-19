@@ -1,0 +1,57 @@
+p {
+  font-family: sans-serif;
+}
+#log {
+  font-family: Consolas, Monaco, monospace;
+}
+#videos {
+  height: 200px;
+}
+#publisher {
+  float: left;
+  left: 10px;
+}
+#subscribers {
+  float: left;
+}
+#subscribers > div {
+  float: left;
+  margin-left: 4px;
+}
+.subscriberDisconnectedNotification {
+  position: absolute;
+  visibility: hidden;
+  left: 4px;
+  top: 4px;
+  color: yellow !important;
+}
+#signalButton {
+  margin-left: 100px;
+}
+#signals {
+  font-family: Consolas, Monaco, monospace;
+  padding: 4px 4px 4px 4px;
+  overflow-y: scroll;
+  clear: both;
+  background-color: silver;
+  height: 100px;
+  width: 500px;
+}
+#signals::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+#signals::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+#signals::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
