@@ -21,11 +21,11 @@ static double widgetWidth = 320;
 @property (nonatomic, strong) UIView *streamReconnectingView;
 @property (nonatomic, strong) UIActivityIndicatorView *reconnectingSpinner;
 
-
 - (void)doConnect;
 - (void)doPublish;
 - (void)doSubscribe:(OTStream*)stream;
 
+- (void)batteryLevelChanged:(NSNotification *)notification;
 - (void)showReconnectingAlert;
 - (void)dismissReconnectingAlert;
 - (void)showErrorAlert:(NSString *)message;
@@ -45,6 +45,11 @@ static double widgetWidth = 320;
     self.session = [[OTSession alloc] initWithApiKey:kApiKey
                                            sessionId:kSessionId
                                             delegate:self];
+    
+    [UIDevice currentDevice].batteryMonitoringEnabled = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryLevelChanged:)
+                                                 name:UIDeviceBatteryLevelDidChangeNotification object:nil];
 
     [self doConnect];
 }
@@ -165,6 +170,21 @@ static double widgetWidth = 320;
 }
 
 #pragma mark - Utils
+- (void)batteryLevelChanged:(NSNotification *)notification
+{
+    NSString *signalText = [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel];
+    OTError *error;
+    [self.session signalWithType:@"signal"
+                          string:signalText
+                      connection:nil
+             retryAfterReconnect:NO
+                           error:&error];
+    
+    if (error) {
+        [self showErrorAlert:[error localizedDescription]];
+    }
+}
+
 - (void)buildReconnectingViews
 {
     self.streamReconnectingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, widgetWidth, widgetHeight)];
