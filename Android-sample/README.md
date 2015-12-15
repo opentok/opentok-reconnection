@@ -50,9 +50,6 @@ To configure and test the app:
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
-   To use the automatic reconnection feature, you must use a routed session (one that uses the
-   OpenTok Media Router).
-
    For more information, see the OpenTok [Session Creation
    Overview](https://tokbox.com/opentok/tutorials/create-session/) and the [Token Creation
    Overview](https://tokbox.com/opentok/tutorials/create-token/).
@@ -64,7 +61,8 @@ To configure and test the app:
 
 4.  Run the app on your device, selecting the default activity as the launch action.
 
-5. Disable the internet connection on your device (both the Wi-Fi connection and a)
+5. Disable the internet connection (both the Wi-Fi connection and any other network connection)
+   on your debug device.
 
    The app displays an Android ProgressDialog with the message "Reconnecting. Please wait...."
    It also logs "Reconnecting the session" to the debug console.
