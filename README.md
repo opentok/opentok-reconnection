@@ -13,8 +13,8 @@ Clients connected to sessions that use the automatic reconnection feature can do
 * Attempt to reconnect to a stream it is subscribing to that is temporarily dropped.
 
 * Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).
+  reconnection (or not). For more information, see the signaling developer guide for   
+  [JS](https://tokbox.com/developer/guides/signaling/js/), [iOS] (https://tokbox.com/developer/guides/signaling/ios/) and [Android] (https://tokbox.com/developer/guides/signaling/android/).
 
-This repo include samples for each of the OpenTok client SDKs. See the Android-sample, iOS-sample,
+This repository include samples for each of the OpenTok client SDKs. See the Android-sample, iOS-sample,
 and js-sample subdirectories.
