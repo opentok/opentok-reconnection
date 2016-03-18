@@ -1,7 +1,7 @@
 OpenTok.js Automatic Reconnection Sample
 ========================================
 
-This sample shows how to use the OpenTok.js automatic reconnection beta feature.
+This sample shows you how to use the OpenTok.js Automatic Reconnection preview feature.
 
 *Important* To use this feature, you must contact TokBox to participate in the beta program.
 See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page.
@@ -21,30 +21,33 @@ Clients connected to sessions that use the automatic reconnection feature can do
 
 To configure and test the app:
 
-1. Make a copy the sample-config.js file in the web/js/ directory. Name the copy config.js (and
-   save it to the web/js/directory). Set the following to your OpenTok API, a session ID, and
-   a token for that session:
+1. In the *web/js/* directory, make a copy of the *sample-config.js* file and rename this 
+   copy as *config.js*. Within the file, set the following variables to your OpenTok API key, 
+   a session ID to use, and a token for that session:
 
    ```
-   var apiKey = '';
-   var sessionId = '';
-   var token = '';
+   var apiKey = 'YOUR-API-KEY';
+   var sessionId = 'YOUR-SESSION-ID';
+   var token = 'YOUR-SESSION-TOKEN';
    ```
 
-   You can get your API key as well as a test session ID and token at the
-   [OpenTok dashboard](https://dashboard.tokbox.com/). However, in a shipping application, use
-   one of the [OpenTok server SDKs](https://tokbox.com/developer/sdks/server/) to generate a
-   session ID and token.
+   You can get your API key and generate a test session ID and token from the
+   [OpenTok dashboard](https://dashboard.tokbox.com/) for the purpose of this demo. 
+   However, when deploying your application to production, you should not hardcode 
+   a session ID and token as we do here. Instead, you shoud use one of the 
+   [OpenTok server SDKs](https://tokbox.com/developer/sdks/server/) to dynamically
+   generate a session ID and token.
 
-2. Install the sample code on a web server. Note that you must load the code from a web server.
-   Browsers do not support WebRTC video in pages loaded from a file:// URL.
+2. Install the sample code on a web server. Note that you must load the code from 
+   a web server (you can run a web server locally on your machine and make it accessible at localhost).
+   Browsers do not support WebRTC video in pages loaded directly from a file:// URL.
 
 3. In a web browser, navigate to the index.html page for the app. The app connects to the
    OpenTok session.
 
 4. Grant the page access to your camera and microphone.
 
-5. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi
+5. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi,
    disable the Wi-Fi connection.)
 
    The Session Status text field in the app changes to "Disconnected from session. Attempting to
