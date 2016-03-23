@@ -31,12 +31,17 @@ To configure and try the sample code:
    var token = 'YOUR-SESSION-TOKEN';
    ```
 
-   You can get your API key and generate a test session ID and token from the
-   [OpenTok dashboard](https://dashboard.tokbox.com/) for the purpose of this demo. 
-   However, when deploying your application to production, you should not hardcode 
-   a session ID and token as we do here. Instead, you shoud use one of the 
-   [OpenTok server SDKs](https://tokbox.com/developer/sdks/server/) to dynamically
-   generate a session ID and token.
+   Use the API key provided to you for the purposes of this developer preview of the
+   Automatic Reconnections feature. With the API key, you can generate a session ID
+   and token to use. To obtain an API key, please see the main project [README](../README.md) 
+   on how to enroll in this developer preview.
+
+	 For the purposes of quickly demonstrating the Automatic Reconnections functionality
+   through this sample code, we are utilizing the `config.js` to set an API key, session ID
+   and token to use. However, when deploying your application to production, 
+   you should not hardcode the session ID and token as we do here. Instead, you shoud 
+   use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
+   dynamically generate a session ID and token.
 
 2. Install the sample code on a web server. Note that you must load the code from 
    a web server (you can run a web server locally on your machine and make it accessible at localhost).
