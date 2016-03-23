@@ -37,8 +37,8 @@ To configure and try the sample code:
    on how to enroll in this developer preview.
 
 	 For the purposes of quickly demonstrating the Automatic Reconnections functionality
-   through this sample code, we are utilizing the `config.js` to set an API key, session ID
-   and token to use. However, when deploying your application to production, 
+   through this sample code, we are utilizing the `config.js` file to set an API key, 
+   a session ID and a token to use. However, when deploying your application to production, 
    you should not hardcode the session ID and token as we do here. Instead, you shoud 
    use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
    dynamically generate a session ID and token.
