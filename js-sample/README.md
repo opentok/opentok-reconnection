@@ -1,25 +1,25 @@
-OpenTok.js Automatic Reconnection Sample
-========================================
+OpenTok.js Automatic Reconnection Sample Code
+=============================================
 
-This sample shows you how to use the OpenTok.js Automatic Reconnection preview feature.
+This sample code shows you how to use the Automatic Reconnection feature with the OpenTok.js client SDK.
 
-*Important* To use this feature, you must contact TokBox to participate in the preview.
+**Important:** To use this feature, you must contact TokBox to participate in the preview.
 See the main project [README](../README.md) on how to enroll.
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
-* Attempt to reconnect to the session if the client has disconnected due to a temporary drop in
-  network connectivity.
+* Attempt to automatically reconnect to the session if the client has disconnected due 
+  to a temporary drop in network connectivity.
 
-* Attempt to reconnect to a stream it is subscribed to that is temporarily dropped.
+* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
-* Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).
+* Attempt to automatically resend signals that are initiated by the client while disconnected
+  upon a successful reconnection. (For more information about Signaling, see the
+  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/))
 
-## Testing the app
+## Trying the sample code
 
-To configure and test the app:
+To configure and try the sample code:
 
 1. In the `web/js/` directory, make a copy of the `sample-config.js` file and rename this 
    copy as `config.js`. Within the file, set the following variables to your OpenTok API key, 
@@ -160,6 +160,6 @@ function sendSignal() {
 }
 ```
 
-The `retrySignalOnReconnect` variable is set in the js/config.js file.
+The `retrySignalOnReconnect` variable is set in the `config.js` file.
 
  
