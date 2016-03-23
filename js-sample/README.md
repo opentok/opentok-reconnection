@@ -85,10 +85,10 @@ Now we will test how OpenTok signaling can be disabled when reconnecting to a se
 
 1. Leave the two browser windows open (and connected to the OpenTok session).
 
-2. In one window, click the Send Signal button. Note that the signal is received and logged in
+2. In one window, click the "Send Signal" button. Note that the signal is received and logged in
    each client.
 
-3. Disconnect the internet connection for your computer, and click the Send Signal button again.
+3. Disconnect the internet connection for your computer, and click the "Send Signal" button again.
 
 4. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, note that the
    signal is not sent. This is because the `retryAfterReconnect` option is set to `false` in the
