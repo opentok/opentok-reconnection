@@ -25,7 +25,7 @@ To configure and try the sample code:
    copy as `config.js`. Within the file, set the following variables to your OpenTok API key, 
    a session ID to use, and a token for that session:
 
-   ```
+	 ```javascript
    var apiKey = 'YOUR-API-KEY';
    var sessionId = 'YOUR-SESSION-ID';
    var token = 'YOUR-SESSION-TOKEN';
@@ -46,7 +46,7 @@ To configure and try the sample code:
 2. In the `web/` directory, open the `index.html` file and look for this particular line
    below:
 
-   ```
+   ```html
    <script src="URL-TO-OPENTOK-JS-SDK" type="text/javascript" charset="utf-8"></script>
    ```
 
