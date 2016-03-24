@@ -43,40 +43,51 @@ To configure and try the sample code:
    use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
    dynamically generate a session ID and token.
 
-2. Install the sample code on a web server. Note that you must load the code from 
+2. In the `web/` directory, open the `index.html` file and look for this particular line
+   below:
+
+   ```
+   <script src="URL-TO-OPENTOK-JS-SDK" type="text/javascript" charset="utf-8"></script>
+   ```
+
+   You will replace this with the URL to the developer preview version of the 
+   OpenTok JS SDK. Refer to the main project [README](../README.md) to get the URL
+   of the OpenTok JS SDK you should use. 
+
+3. Install the sample code on a web server. Note that you must load the code from 
    a web server (you can run a web server locally on your machine and make it accessible at localhost).
    Browsers do not support WebRTC video in pages loaded directly from a file:// URL.
 
-3. In a web browser, navigate to the `index.html` page for the app. The app connects to the
+4. In a web browser, navigate to the `index.html` page for the app. The app connects to the
    OpenTok session with the specified session ID.
 
-4. Grant the page access to your camera and microphone.
+5. Grant the page access to your camera and microphone.
 
-5. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi,
+6. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi,
    disable the Wi-Fi connection.)
 
    The Session Status text field shown on the webpage changes to "Disconnected from session. Attempting to
-   reconnect."
+   reconnect..."
 
-6. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the Session
+7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the Session
    Status text field changes to "Reconnected to the session."
 
 Now we will add a second client connected to the session:
 
 1. Mute your computer (so that you will not receive audio feedback).
 
-2. Open a new browser window or tab, and navigate to the index.html page for the app. The app
-   connects to the OpenTok session.
+2. Open a new browser window or tab, and navigate to the `index.html` page, where it will
+   connect to the OpenTok session.
 
 3. Grant the page access to your camera and microphone.
 
-   In addition to the published video, each window displays the video from the other, which it
-   subscribes to.
+   In addition to the published video, each window displays the video from the other 
+   participant it is subscribed to.
 
 4. Disconnect the internet connection for your computer.
 
-   The subscriber video stream display includes a "Stream disconnected temporarily. Attempting to
-   reconnect."
+   The subscriber video stream display now shows "Stream has been disconnected unexpectedly. 
+   Attempting to automatically reconnect..."
 
 5. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the
    "attempting to reconnect" message for the subscriber is hidden.
