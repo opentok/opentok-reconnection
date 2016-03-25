@@ -30,9 +30,8 @@ at **automatic-reconnection-beta@tokbox.com**
 >    steps in your code/architecture implementation to handle this? Do you take 
 >    certain steps in your product/user experience to account for session disconnections?
 
-2. A developer preview API key and secret would then be provided to your
-given contact email. You will use this API key with your choice of an OpenTok 
-client-side SDK and a [server-side SDK](https://tokbox.com/developer/sdks/server/).
+2. A developer preview API key and secret would be provided to your contact email. 
+You will use this API key to evaluate and test the automatic reconnections feature.
 
 3. For the purposes of this developer preview, you will need to use 
 one of the developer preview versions of the client-side SDK provided below:
@@ -41,10 +40,10 @@ one of the developer preview versions of the client-side SDK provided below:
   * JS SDK: https://preview.tokbox.com/v2/js/opentok.js
 
 4. Choose an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/
-and host it on your web server, 
-you will need to configure it to point to our preview environment. To do so, you will 
-provide the `apiUrl` when initializing the OpenTok object with the server-side SDK. 
-Set the `apiUrl` to `https://anvil-tbdev.opentok.com`
+and host it on your web server, you will use the server-side SDK to generate session IDs
+and tokens. You will need to configure the server-side SDK to use our preview environment. 
+To do so, you will provide an `apiUrl` when initializing the OpenTok object with 
+the server-side SDK. Set the `apiUrl` to `https://anvil-tbdev.opentok.com` as shown below:
 ##### Node.js
     ```javascript
     var OpenTok = require('opentok'), 
@@ -58,22 +57,42 @@ Set the `apiUrl` to `https://anvil-tbdev.opentok.com`
     ```
 ##### PHP
     ```php
-		use OpenTok\OpenTok;
+    use OpenTok\OpenTok;
 
-		$apiUrl = 'https://anvil-tbdev.opentok.com';
-		$opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
+    $apiUrl = 'https://anvil-tbdev.opentok.com';
+    $opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
 
     ```
 ##### Python
+    ```python
+    from opentok import OpenTok
+
+    api_url = 'https://anvil-tbdev.opentok.com'
+    opentok = OpenTok(api_key, api_secret, api_url)
+    ```
 ##### Ruby
+    ```ruby
+    require "opentok"
+
+    api_url = "https://anvil-tbdev.opentok.com"
+    opentok = OpenTok::OpenTok.new api_key, api_secret, api_url
+    ```
 ##### .Net 
+    ```
+    using OpenTokSDK;
+
+    // ...
+
+    string ApiUrl = "https://anvil-tbdev.opentok.com";
+    var OpenTok = new OpenTok(ApiKey, ApiSecret, ApiUrl);
+    ```
 
 5. Use your selected OpenTok server-side SDK to generate a Session ID and token with
 your provided Developer Preview API key and secret. You will use the Session ID and token
 with the sample code provided in this project to test out the automatic reconnections feature.
 
 This repository include samples for each of the OpenTok client 
-SDKs: Android, iOS and Javascript. See the Android-sample, iOS-sample,
+SDKs: Android, iOS and JavaScript. See the Android-sample, iOS-sample,
 and js-sample subdirectories.
 
 
