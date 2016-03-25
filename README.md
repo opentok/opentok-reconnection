@@ -45,21 +45,28 @@ and host it on your web server,
 you will need to configure it to point to our preview environment. To do so, you will 
 provide the `apiUrl` when initializing the OpenTok object with the server-side SDK. 
 Set the `apiUrl` to `https://anvil-tbdev.opentok.com`
-#### Node.js
+##### Node.js
     ```javascript
     var OpenTok = require('opentok'), 
         apiUrl = 'https://anvil-tbdev.opentok.com',
         opentok = new OpenTok(apiKey, apiSecret, apiUrl);
     ```
-#### Java
+##### Java
     ```java
     String apiUrl = "https://anvil-tbdev.opentok.com";
     OpenTok opentok = new OpenTok(apiKey, apiSecret, apiUrl);
     ```
-  * PHP
-  * Python:
-  * Ruby:
-  * .Net: 
+##### PHP
+    ```php
+		use OpenTok\OpenTok;
+
+		$apiUrl = 'https://anvil-tbdev.opentok.com';
+		$opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
+
+    ```
+##### Python
+##### Ruby
+##### .Net 
 
 5. Use your selected OpenTok server-side SDK to generate a Session ID and token with
 your provided Developer Preview API key and secret. You will use the Session ID and token
