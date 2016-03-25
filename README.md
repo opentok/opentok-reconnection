@@ -40,18 +40,23 @@ one of the developer preview versions of the client-side SDK provided below:
   * iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
   * JS SDK: https://preview.tokbox.com/v2/js/opentok.js
 
-4. Select your choice of an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/.
-Once you have selected a language for the server-side SDK and host it on your web server, 
+4. Choose an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/
+and host it on your web server, 
 you will need to configure it to point to our preview environment. To do so, you will 
-provide an extra parameter, the `apiUrl`, when initializing the OpenTok object with the server-side SDK. 
-Set the `apiUrl` to https://anvil-tbdev.opentok.com.
-	* Node.js
+provide the `apiUrl` when initializing the OpenTok object with the server-side SDK. 
+Set the `apiUrl` to `https://anvil-tbdev.opentok.com`
+#### Node.js
     ```javascript
-    var OpenTok = require('opentok'),
-    opentok = new OpenTok(apiKey, apiSecret, 'https://anvil-tbdev.opentok.com');
+    var OpenTok = require('opentok'), 
+        apiUrl = 'https://anvil-tbdev.opentok.com',
+        opentok = new OpenTok(apiKey, apiSecret, apiUrl);
     ```
-	* Java
-  * PHP:
+#### Java
+    ```java
+    String apiUrl = "https://anvil-tbdev.opentok.com";
+    OpenTok opentok = new OpenTok(apiKey, apiSecret, apiUrl);
+    ```
+  * PHP
   * Python:
   * Ruby:
   * .Net: 
