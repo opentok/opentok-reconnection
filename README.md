@@ -15,7 +15,6 @@ this group, you would need to do the following:
 
 1. Answer the following questions and send back your responses to us 
 at **automatic-reconnection-beta@tokbox.com**
-
 > 1. Your preferred contact email for this developer preview.
 >
 > 2. Please list which platforms (Android, iOS, Web, etc.) that your 
@@ -33,20 +32,25 @@ at **automatic-reconnection-beta@tokbox.com**
 
 2. A developer preview API key and secret would then be provided to your
 given contact email. You will use this API key with your choice of an OpenTok 
-client-side SDK and a server-side SDK.
+client-side SDK and a [server-side SDK](https://tokbox.com/developer/sdks/server/).
 
-3. Select your choice of an OpenTok client-side SDK from the available Android, iOS 
-and JS options. For the purposes of this developer preview, you will need to use 
+3. For the purposes of this developer preview, you will need to use 
 one of the developer preview versions of the client-side SDK provided below:
   * Android SDK: https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
   * iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
   * JS SDK: https://preview.tokbox.com/v2/js/opentok.js
 
 4. Select your choice of an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/.
-Once you have selected a language for the server-side SDK, you will need to configure it
-to point to our Developer Preview server environment
-	* Node.js: 
-	* Java:
+Once you have selected a language for the server-side SDK and host it on your web server, 
+you will need to configure it to point to our preview environment. To do so, you will 
+provide an extra parameter, the `apiUrl`, when initializing the OpenTok object with the server-side SDK. 
+Set the `apiUrl` to https://anvil-tbdev.opentok.com.
+	* Node.js
+    ```javascript
+    var OpenTok = require('opentok'),
+    opentok = new OpenTok(apiKey, apiSecret, 'https://anvil-tbdev.opentok.com');
+    ```
+	* Java
   * PHP:
   * Python:
   * Ruby:
