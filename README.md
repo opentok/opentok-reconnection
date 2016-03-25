@@ -78,7 +78,7 @@ the server-side SDK. Set the `apiUrl` to `https://anvil-tbdev.opentok.com` as sh
     opentok = OpenTok::OpenTok.new api_key, api_secret, api_url
     ```
 ##### .Net 
-    ```
+    ```dotnet
     using OpenTokSDK;
 
     // ...
