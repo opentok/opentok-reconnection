@@ -13,8 +13,8 @@ We are about to provide a preview of Automatic Reconnections to an
 initial group of developers. If you are interested in being a part of 
 this group, you would need to do the following: 
 
-1. Answer the following questions and send back your responses to us 
-at **automatic-reconnection-beta@tokbox.com**
+1. Answer the following questions and send your responses to 
+**automatic-reconnection-beta@tokbox.com**
 > 1. Your preferred contact email for this developer preview.
 >
 > 2. Please list which platforms (Android, iOS, Web, etc.) that your 
@@ -33,14 +33,14 @@ at **automatic-reconnection-beta@tokbox.com**
 2. A developer preview API key and secret would be provided to your contact email. 
 You will use this API key to evaluate and test the automatic reconnections feature.
 
-3. For the purposes of this developer preview, you will need to use 
-one of the developer preview versions of the client-side SDK provided below:
+3. **Client-side SDK:** For the purposes of this developer preview, you will need to use 
+one of the developer previews of the client-side SDK:
   * Android SDK: https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
   * iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
   * JS SDK: https://preview.tokbox.com/v2/js/opentok.js
 
-4. Choose an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/
-and host it on your web server, you will use the server-side SDK to generate session IDs
+4. **Server-side SDK:** Choose an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/
+and host it on your web server, as you will use the server-side SDK to generate session IDs
 and tokens. You will need to configure the server-side SDK to use our preview environment. 
 To do so, you will provide an `apiUrl` when initializing the OpenTok object with 
 the server-side SDK. Set the `apiUrl` to `https://anvil-tbdev.opentok.com` as shown below:
@@ -87,8 +87,8 @@ the server-side SDK. Set the `apiUrl` to `https://anvil-tbdev.opentok.com` as sh
     var OpenTok = new OpenTok(ApiKey, ApiSecret, ApiUrl);
     ```
 
-5. Use your selected OpenTok server-side SDK to generate a Session ID and token with
-your provided Developer Preview API key and secret. You will use the Session ID and token
+5. Use your selected OpenTok server-side SDK to generate a session ID and token with
+your provided Developer Preview API key and secret. You will use the session ID and token
 with the sample code provided in this project to test out the automatic reconnections feature.
 
 This repository include samples for each of the OpenTok client 
