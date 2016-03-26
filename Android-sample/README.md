@@ -25,7 +25,7 @@ To configure and try the sample code:
 
    To import the project directly into Android Studio:
 
-   * In Android Studio, choose File > New > Import Project and choose the `settings.gradle` file in
+   * In Android Studio, choose *File > New > Import Project* and choose the `settings.gradle` file in
      the `Android-sample` directory. Or, if you are viewing the Android Studio welcome screen,
      click "Import Project".
 
@@ -38,7 +38,7 @@ To configure and try the sample code:
 
 2. Configure the project to use your own OpenTok session and token:
 
-   Open the MainActivity.java file (in the com.opentok.reconnection.sample package) and set
+   Open the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package) and set
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
@@ -89,7 +89,7 @@ to a session:
 
 ## Understanding the code
 
-Locate the `MainActivity.java` file (in the com.opentok.reconnection.sample package. 
+Locate the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package). 
 The MainActivity class connects to the OpenTok session, and adds a SessionListener 
 object to act as the
 SessionListener and Session.ReconnectionListener for the Session object:
@@ -135,10 +135,10 @@ mSubscriber.setVideoListener(mSubscriberListener);
 mSubscriber.setStreamListener(mSubscriberListener);
 ```
 
-The SubscriberListener class (defined in the MainActivity.java file), implements the
-`Subscriber.StreamListener.onReconnecting(Session session)` and
-`Subscriber.StreamListener.onReconnected(Session session)` methods of the
-Session.SessionReconnectionListener interface (defined in the OpenTok Android SDK):
+The SubscriberListener class (defined in the `MainActivity.java` file), implements the
+`SubscriberKit.StreamListener.onReconnected(SubscriberKit subscriberKit)` and
+`SubscriberKit.StreamListener.onDisconnected(SubscriberKit subscriberKit)` methods of the 
+SubscriberKit.StreamListener interface (defined in the OpenTok Android SDK):
 
 ```java
 @Override
