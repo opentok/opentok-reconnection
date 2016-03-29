@@ -39,7 +39,7 @@ To configure and try the sample code:
 	 For the purposes of quickly demonstrating the Automatic Reconnections functionality
    through this sample code, we are utilizing the `config.js` file to set an API key, 
    a session ID and a token to use. However, when deploying your application to production, 
-   you should not hardcode the session ID and token as we do here. Instead, you shoud 
+   you should not hardcode the session ID and token as we do here. Instead, you should 
    use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
    dynamically generate a session ID and token.
 
@@ -51,8 +51,7 @@ To configure and try the sample code:
    ```
 
    You will replace this with the URL to the developer preview version of the 
-   OpenTok JS SDK. Refer to the main project [README](../README.md) to get the URL
-   of the OpenTok JS SDK you should use. 
+   OpenTok.js SDK. Refer to the main project [README](../README.md) for more information. 
 
 3. Install the sample code on a web server. Note that you must load the code from 
    a web server (you can run a web server locally on your machine and make it accessible at localhost).
@@ -69,8 +68,8 @@ To configure and try the sample code:
    The Session Status text field shown on the webpage changes to "Disconnected from session. Attempting to
    reconnect..."
 
-7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the Session
-   Status text field changes to "Reconnected to the session."
+7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the displayed text 
+   field changes to "Reconnected to the session."
 
 Now we will add a second client connected to the session:
 
@@ -86,7 +85,7 @@ Now we will add a second client connected to the session:
 
 4. Disconnect the internet connection for your computer.
 
-   The subscriber video stream display now shows "Stream has been disconnected unexpectedly. 
+   The subscriber video element now shows "Stream has been disconnected unexpectedly. 
    Attempting to automatically reconnect..."
 
 5. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the
@@ -130,15 +129,14 @@ session.on({
 The Session object in the code snippet above dispatches the `sessionReconnecting` 
 event when the client is 
 attempting to reconnect to the session. The `sessionReconnected` event is dispatched 
-when the reconnection attempt is successfully. The code adjusts the user interface 
+when the reconnection attempt succeeds. The code adjusts the user interface 
 message in response to each event.
 
 In the code snippet below, when the `streamCreated` event occurs (indicating that 
 another client's stream is available in the session), the client subscribes to 
 that stream. The Subscriber object dispatches the `disconnected` event when the 
-subscriber stream is dropped and the `connected` event when it is restored.
-The client creates a `<div>` element in the form of a `subscriberDisconnectedNotification`
-that is made visible when the subscriber stream is dropped. 
+subscriber stream is dropped and dispatches the `connected` event when it is restored.
+The client creates a `<div>` element to notify the user when the subscriber is disconnected.
 These elements are initially hidden, and they are hidden again when 
 a subscriber stream is restored.
 

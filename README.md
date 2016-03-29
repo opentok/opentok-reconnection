@@ -4,8 +4,8 @@ This project contains sample code demonstrating the
 OpenTok Automatic Reconnection Developer Preview.
 
 With Automatic Reconnections, your client can now automatically reconnect 
-to OpenTok sessions during temporary drops in network connectivity. 
-If you have a mobile client using OpenTok, the feature helps restores 
+to OpenTok sessions after temporary drops in network connectivity. 
+If you have a mobile client using OpenTok, the feature helps restore 
 connectivity during transitions between network interfaces such as Wi-Fi and LTE, 
 allowing you to build a more robust integration and end-user experience.
 
