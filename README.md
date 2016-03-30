@@ -1,20 +1,113 @@
 opentok-reconnection
 ====================
-Samples for the [OpenTok](https://tokbox.com/developer/) automatic reconnection beta feature.
+This project contains sample code demonstrating the 
+OpenTok Automatic Reconnection Developer Preview.
 
-*Important* To use this feature, you must contact TokBox to participate in the beta program.
-See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page.
+With Automatic Reconnections, your client can now automatically reconnect 
+to OpenTok sessions after temporary drops in network connectivity. 
+If you have a mobile client using OpenTok, the feature helps restore 
+connectivity during transitions between network interfaces such as Wi-Fi and LTE, 
+allowing you to build a more robust integration and end-user experience.
+
+We are about to provide a preview of Automatic Reconnections to an 
+initial group of developers. If you are interested in being a part of 
+this group, you would need to do the following: 
+
+1. Answer the following questions and send your responses to 
+**automatic-reconnection-beta@tokbox.com**
+> 1. Your preferred contact email for this developer preview.
+>
+> 2. Please list which platforms (Android, iOS, Web, etc.) that your 
+>    product is implemented on with OpenTok.
+>
+> 3. Please explain the current problems that you have that you hope 
+>    would be solved by the Automatic Reconnection feature.
+>
+> 4. Are session disconnections a common issue for your product experience with OpenTok? 
+>    In your own investigations, what have been common causes for these disconnections? 
+>
+> 5. How are you solving session disconnections right now? Do you take certain 
+>    steps in your code/architecture implementation to handle this? Do you take 
+>    certain steps in your product/user experience to account for session disconnections?
+
+2. A developer preview API key and secret would be provided to your contact email. 
+You will use this API key to evaluate and test the automatic reconnections feature.
+
+3. **Client-side SDK:** For the purposes of this developer preview, you will need to use 
+one of the developer previews of the client-side SDK:
+  * Android SDK: https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
+  * iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
+  * JS SDK: https://preview.tokbox.com/v2/js/opentok.js
+
+4. **Server-side SDK:** Choose an OpenTok server-side SDK from https://tokbox.com/developer/sdks/server/
+and host it on your web server, as you will use the server-side SDK to generate session IDs
+and tokens. You will need to configure the server-side SDK to use our preview environment. 
+To do so, you will provide an `apiUrl` when initializing the OpenTok object with 
+the server-side SDK. Set the `apiUrl` to `https://anvil-tbdev.opentok.com` as shown below:
+##### Node.js
+    ```javascript
+    var OpenTok = require('opentok'), 
+        apiUrl = 'https://anvil-tbdev.opentok.com',
+        opentok = new OpenTok(apiKey, apiSecret, apiUrl);
+    ```
+##### Java
+    ```java
+    String apiUrl = "https://anvil-tbdev.opentok.com";
+    OpenTok opentok = new OpenTok(apiKey, apiSecret, apiUrl);
+    ```
+##### PHP
+    ```php
+    use OpenTok\OpenTok;
+
+    $apiUrl = 'https://anvil-tbdev.opentok.com';
+    $opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
+
+    ```
+##### Python
+    ```python
+    from opentok import OpenTok
+
+    api_url = 'https://anvil-tbdev.opentok.com'
+    opentok = OpenTok(api_key, api_secret, api_url)
+    ```
+##### Ruby
+    ```ruby
+    require "opentok"
+
+    api_url = "https://anvil-tbdev.opentok.com"
+    opentok = OpenTok::OpenTok.new api_key, api_secret, api_url
+    ```
+##### .Net 
+    ```dotnet
+    using OpenTokSDK;
+
+    // ...
+
+    string ApiUrl = "https://anvil-tbdev.opentok.com";
+    var OpenTok = new OpenTok(ApiKey, ApiSecret, ApiUrl);
+    ```
+
+5. Use your selected OpenTok server-side SDK to generate a session ID and token with
+your provided Developer Preview API key and secret. You will use the session ID and token
+with the sample code provided in this project to test out the automatic reconnections feature.
+
+This repository include samples for each of the OpenTok client 
+SDKs: Android, iOS and JavaScript. See the Android-sample, iOS-sample,
+and js-sample subdirectories.
+
+
+## Automatic Reconnections Overview
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
-* Attempt to reconnect to the session if the client has disconnected due to a temporary drop in
-  network connectivity.
+* Attempt to automatically reconnect to the session if the client has disconnected due
+  to a temporary drop in network connectivity.
 
-* Attempt to reconnect to a stream it is subscribing to that is temporarily dropped.
+* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
-* Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). For more information, see the signaling developer guide for   
-  [JS](https://tokbox.com/developer/guides/signaling/js/), [iOS] (https://tokbox.com/developer/guides/signaling/ios/) and [Android] (https://tokbox.com/developer/guides/signaling/android/).
+* Upon a successful reconnection, automatically resend signals that are initiated
+  by the client when it was temporarily disconnected. (For more information about Signaling,
+  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/))
 
-This repository include samples for each of the OpenTok client SDKs. See the Android-sample, iOS-sample,
-and js-sample subdirectories.
+
+

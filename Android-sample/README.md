@@ -1,102 +1,97 @@
-Android Automatic Reconnection Sample
-=====================================
+Android Automatic Reconnection Sample Code
+==========================================
 
-This sample shows how to use the OpenTok Android SDK automatic reconnection beta feature.
+This sample code shows you how to use the Automatic Reconnection feature with the OpenTok Android client SDK.
 
-*Important* To use this feature, you must contact TokBox to participate in the beta program.
-See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page.
+**Important:** To use this feature, you must contact TokBox to participate in the preview.
+See the main project [README](../README.md) on how to enroll.
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
-* Attempt to reconnect to the session if the client has disconnected due to a temporary drop in
-  network connectivity.
+* Attempt to automatically reconnect to the session if the client has disconnected due
+  to a temporary drop in network connectivity.
 
-* Attempt to reconnect to a stream it is subscribing to that is temporarily dropped.
+* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
-* Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).
+* Upon a successful reconnection, automatically resend signals that are initiated
+  by the client when it was temporarily disconnected. (For more information about Signaling,
+  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/))
 
-## Testing the app
+## Trying the sample code
 
-To configure and test the app:
+To configure and try the sample code:
 
 1. Import the project into Android Studio.
 
    To import the project directly into Android Studio:
 
-   * In Android Studio, choose File > New > Import Project and choose the settings.gradle file in
-     the OpenTokSamples directory. Or, if you are viewing the Android Studio welcome screen,
+   * In Android Studio, choose *File > New > Import Project* and choose the `settings.gradle` file in
+     the `Android-sample` directory. Or, if you are viewing the Android Studio welcome screen,
      click "Import Project".
 
-   * Copy the opentok-android-sdk-2.7.0.jar file into the libs directory of the app module.
-     This file is included in the OpenTok/libs subdirectory of the OpenTok Android SDK, available at
-     <http://tokbox.com/opentok/libraries/client/android/>.
+   * For the purposes of this developer preview, you will need to use the developer preview
+     of the OpenTok client-side Android SDK and be enrolled in the Automatic Reconnections Developer Preview.
+     See the main project [README](../README.md) for details.
 
-   * Copy the directories containing native dependencies required for your target environments:
-
-     * armeabi
-     * armeabi-v7a
-     * x86
-
-     You will need the armeabi directory, the armeabi-v7a directory, or both for support on
-     ARM-based devices. You will need the x86 directory for support on x86-based devices or in
-     the supported Android emulators. These directories are included in the OpenTok/libs
-     subdirectory of the OpenTok Android SDK.
+   * Unpack the .tar.bz2 file containing the developer preview of the OpenTok client-side Android SDK.
+     The resulting .aar should be placed in the `libs` directory of the app module.
 
 2. Configure the project to use your own OpenTok session and token:
 
-   Open the MainActivity.java file (in the com.opentok.reconnection.sample package) and set
+   Open the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package) and set
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
-   For more information, see the OpenTok [Session Creation
-   Overview](https://tokbox.com/opentok/tutorials/create-session/) and the [Token Creation
-   Overview](https://tokbox.com/opentok/tutorials/create-token/).
+   Use the API key provided to you when you enrolled in the Automatic Reconnections Developer Preview.
+   With the API key, you will use one of our server-side SDKs to generate a session ID and token.
+   To learn how, please review the main project [README](../README.md).
 
-3.  Connect your Android device to a USB port on your computer. Set up
+3. Connect your Android device to a USB port on your computer. Set up
    [USB debugging](http://developer.android.com/tools/device.html) on your device.
    Or launch the Genymotion x86 emulator or the official Android x86 emulator in combination
    with the Intel HAXM software.
 
-4.  Run the app on your device, selecting the default activity as the launch action.
+4. Run the app on your device, selecting the default activity as the launch action.
 
-5. Disable the internet connection (both the Wi-Fi connection and any other network connection)
-   on your debug device.
+5. Disable the internet connection (both the Wi-Fi connection and any other mobile data connection)
+   on your device.
 
-   The app displays an Android ProgressDialog with the message "Reconnecting. Please wait...."
-   It also logs "Reconnecting the session" to the debug console.
+   The app displays an Android [ProgressDialog](http://developer.android.com/reference/android/app/ProgressDialog.html)
+   with the message "Reconnecting. Please wait....". It also logs "Reconnecting to the session" 
+   to the debug console.
 
-6. Reconnect your device to the network. Upon reconnecting to the OpenTok session, the app
-   app hides the reconnection ProgressDialog and logs "Session has been reconnected" to the debug
-   console.
+6. Enable internet access for your device, this time preferably on your mobile data network. 
+   Upon reconnecting to the OpenTok session, the app hides the ProgressDialog and logs 
+   "Session has been reconnected" to the debug console.
 
-Now we will add a second client connected to the session:
+Now we will add a second client to the session:
 
 1. Install and run the app on another Android device. Or run one instance in a supported Android
    emulator and run another on a device. Mute the speakers so that you will not receive audio
    feedback.
 
-2. Disconnect the internet connection on the device that is _not_ being debugged.
-
-   The app logs a "Subscriber has been disconnected by connection error" to the debug console.
-
-5. Reconnect the device to the network. When the subscribing client reconnects to the stream, it
-   displays a Toast message "Subscriber has been reconnected," and it logs the message to the
+2. Disconnect the internet connection on the second device/client while keeping the original 
+   first device connected to the debug console. From the first client, you will now notice that
+   the message "Subscriber has been disconnected by connection error" has been logged to the 
    debug console.
 
-Finally, the app shows how to disable
+5. Reconnect the second device/client to the network. When the subscriber on the first client 
+   successfully reconnects to the stream, a Toast message "Subscriber has been reconnected"
+   will be displayed and the same message is logged to the ebug console.
+
+Finally, the sample code shows how to disable
 [OpenTok signaling](https://tokbox.com/developer/guides/signaling/android/) while reconnecting
 to a session:
 
 1. The app sends a signal when the battery usage on the device changes. However, if the signal is
    initiated while the app is disconnected from the session, it will not be sent. (You can also
-   have an app send signals initiated while reconnecting; the signals are sent when it reconnects.)
+   have an app re-send signals that were initiated while reconnecting)
 
 ## Understanding the code
 
-Locate the MainActivity.java file (in the com.opentok.reconnection.sample package. The MainActivity
-class connects to the OpenTok session, and adds a SessionListener object to act as the
+Locate the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package). 
+The MainActivity class connects to the OpenTok session, and adds a SessionListener 
+object to act as the
 SessionListener and Session.ReconnectionListener for the Session object:
 
 ```java
@@ -105,7 +100,7 @@ SessionListener and Session.ReconnectionListener for the Session object:
   mSession.setReconnectionListener(mSessionListener);
 ```
 
-The SessionListener class (defined in the MainActivity.java file), implements the
+The SessionListener class (defined in the `MainActivity.java` file), implements the
 `Session.SessionReconnectionListener.onReconnecting(Session session)` and
 `Session.SessionReconnectionListener.onReconnected(Session session)` methods of the
 Session.SessionReconnectionListener interface (defined in the OpenTok Android SDK):
@@ -140,10 +135,10 @@ mSubscriber.setVideoListener(mSubscriberListener);
 mSubscriber.setStreamListener(mSubscriberListener);
 ```
 
-The SubscriberListener class (defined in the MainActivity.java file), implements the
-`Subscriber.StreamListener.onReconnecting(Session session)` and
-`Subscriber.StreamListener.onReconnected(Session session)` methods of the
-Session.SessionReconnectionListener interface (defined in the OpenTok Android SDK):
+The SubscriberListener class (defined in the `MainActivity.java` file), implements the
+`SubscriberKit.StreamListener.onReconnected(SubscriberKit subscriberKit)` and
+`SubscriberKit.StreamListener.onDisconnected(SubscriberKit subscriberKit)` methods of the 
+SubscriberKit.StreamListener interface (defined in the OpenTok Android SDK):
 
 ```java
 @Override
@@ -193,3 +188,5 @@ private BroadcastReceiver mBatteryTracker = new BroadcastReceiver() {
 
 Because the `retryAfterReconnect` parameter is set to `false`, signals that are initiated when
 the client is attempting to reconnect are not sent upon reconnection.
+
+

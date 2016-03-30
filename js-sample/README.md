@@ -1,74 +1,92 @@
-OpenTok.js Automatic Reconnection Sample
-========================================
+OpenTok.js Automatic Reconnection Sample Code
+=============================================
 
-This sample shows how to use the OpenTok.js automatic reconnection beta feature.
+This sample code shows you how to use the Automatic Reconnection feature with the OpenTok.js client SDK.
 
-*Important* To use this feature, you must contact TokBox to participate in the beta program.
-See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page.
+**Important:** To use this feature, you must contact TokBox to participate in the preview.
+See the main project [README](../README.md) on how to enroll.
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
-* Attempt to reconnect to the session if the client has disconnected due to a temporary drop in
-  network connectivity.
+* Attempt to automatically reconnect to the session if the client has disconnected due 
+  to a temporary drop in network connectivity.
 
-* Attempt to reconnect to a stream it is subscribing to that is temporarily dropped.
+* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
-* Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).
+* Upon a successful reconnection, automatically resend signals that are initiated 
+  by the client when it was temporarily disconnected. (For more information about Signaling, 
+  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/))
 
-## Testing the app
+## Trying the sample code
 
-To configure and test the app:
+To configure and try the sample code:
 
-1. Make a copy the sample-config.js file in the web/js/ directory. Name the copy config.js (and
-   save it to the web/js/directory). Set the following to your OpenTok API, a session ID, and
-   a token for that session:
+1. In the `web/js/` directory, make a copy of the `sample-config.js` file and rename this 
+   copy as `config.js`. Within the file, set the following variables to your OpenTok API key, 
+   a session ID to use, and a token for that session:
 
+	 ```javascript
+   var apiKey = 'YOUR-API-KEY';
+   var sessionId = 'YOUR-SESSION-ID';
+   var token = 'YOUR-SESSION-TOKEN';
    ```
-   var apiKey = '';
-   var sessionId = '';
-   var token = '';
+
+   Use the API key provided to you for the purposes of this developer preview of the
+   Automatic Reconnections feature. With the API key, you can generate a session ID
+   and token to use. To obtain an API key, please see the main project [README](../README.md) 
+   on how to enroll in this developer preview.
+
+	 For the purposes of quickly demonstrating the Automatic Reconnections functionality
+   through this sample code, we are utilizing the `config.js` file to set an API key, 
+   a session ID and a token to use. However, when deploying your application to production, 
+   you should not hardcode the session ID and token as we do here. Instead, you should 
+   use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
+   dynamically generate a session ID and token.
+
+2. In the `web/` directory, open the `index.html` file and look for this particular line
+   below:
+
+   ```html
+   <script src="URL-TO-OPENTOK-JS-SDK" type="text/javascript" charset="utf-8"></script>
    ```
 
-   You can get your API key as well as a test session ID and token at the
-   [OpenTok dashboard](https://dashboard.tokbox.com/). However, in a shipping application, use
-   one of the [OpenTok server SDKs](https://tokbox.com/developer/sdks/server/) to generate a
-   session ID and token.
+   You will replace this with the URL to the developer preview version of the 
+   OpenTok.js SDK. Refer to the main project [README](../README.md) for more information. 
 
-2. Install the sample code on a web server. Note that you must load the code from a web server.
-   Browsers do not support WebRTC video in pages loaded from a file:// URL.
+3. Install the sample code on a web server. Note that you must load the code from 
+   a web server (you can run a web server locally on your machine and make it accessible at localhost).
+   Browsers do not support WebRTC video in pages loaded directly from a file:// URL.
 
-3. In a web browser, navigate to the index.html page for the app. The app connects to the
-   OpenTok session.
+4. In a web browser, navigate to the `index.html` page for the app. The app connects to the
+   OpenTok session with the specified session ID.
 
-4. Grant the page access to your camera and microphone.
+5. Grant the page access to your camera and microphone.
 
-5. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi
+6. Disconnect the internet connection for your computer. (For example, if you are using Wi-Fi,
    disable the Wi-Fi connection.)
 
-   The Session Status text field in the app changes to "Disconnected from session. Attempting to
-   reconnect."
+   The Session Status text field shown on the webpage changes to "Disconnected from session. Attempting to
+   reconnect..."
 
-6. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the Session
-   Status text field changes to "Reconnected to the session."
+7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the displayed text 
+   field changes to "Reconnected to the session."
 
 Now we will add a second client connected to the session:
 
 1. Mute your computer (so that you will not receive audio feedback).
 
-2. Open a new browser window or tab, and navigate to the index.html page for the app. The app
-   connects to the OpenTok session.
+2. Open a new browser window or tab, and navigate to the `index.html` page, where it will
+   connect to the OpenTok session.
 
 3. Grant the page access to your camera and microphone.
 
-   In addition to the published video, each window displays the video from the other, which it
-   subscribes to.
+   In addition to the published video, each window displays the video from the other 
+   participant it is subscribed to.
 
 4. Disconnect the internet connection for your computer.
 
-   The subscriber video stream display includes a "Stream disconnected temporarily. Attempting to
-   reconnect."
+   The subscriber video element now shows "Stream has been disconnected unexpectedly. 
+   Attempting to automatically reconnect..."
 
 5. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the
    "attempting to reconnect" message for the subscriber is hidden.
@@ -77,45 +95,50 @@ Now we will test how OpenTok signaling can be disabled when reconnecting to a se
 
 1. Leave the two browser windows open (and connected to the OpenTok session).
 
-2. In one window, click the Send Signal button. Note that the signal is received and logged in
+2. In one window, click the "Send Signal" button. Note that the signal is received and logged in
    each client.
 
-3. Disconnect the internet connection for your computer, and click the Send Signal button again.
+3. Disconnect the internet connection for your computer, and click the "Send Signal" button again.
 
 4. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, note that the
    signal is not sent. This is because the `retryAfterReconnect` option is set to `false` in the
-   call to the `Session.signal()` method. Note, however, that signals initiated by other clients
-   that have _not_ lost their connections to the session while you are reconnecting will be
-   received when your client reconnects.
+   call to the `Session.signal()` method, so signals that were initiated when the client is 
+   disconnected will not be sent. However, signals initiated by other clients that are still connected 
+   to the session will be received when your client successfully reconnects.
 
 ## Understanding the code
 
-Locate the main app.js file in the web/js directory. It connects to the OpenTok session and adds
-a number of event listeners for the Session object:
+Within the `web/js` directory, locate the `app.js` file, which contains code to connect to 
+an OpenTok session and adds a number of event listeners for the Session object:
 
 ```javascript
 session.on({
   sessionReconnecting: function(event) {
     document.getElementById('log').innerText =
-      'Disconnected from the session. Attempting to reconnect.';
+      'Disconnected from the session. Attempting to reconnect...';
   },
   sessionReconnected: function(event) {
     document.getElementById('log').innerText = 'Reconnected to the session.';
   },
-  disconnected: function(event) {
+  sessionDisconnected: function(event) {
     document.getElementById('log').innerText = 'Disconnected from the session.';
   }
 });
 ```
 
-The Session object dispatches `sessionReconnecting` and `sessionReconnected` events when the
-client is attempting to reconnect to the session and when it successfully reconnects. The code
-adjusts user interface messages upon each of these events being dispatched.
+The Session object in the code snippet above dispatches the `sessionReconnecting` 
+event when the client is 
+attempting to reconnect to the session. The `sessionReconnected` event is dispatched 
+when the reconnection attempt succeeds. The code adjusts the user interface 
+message in response to each event.
 
-When the Session object dispatches the `streamCreated` event (indicating that another client's
-stream is available in the session), the client subscribes to that stream. The Subscriber object
-dispatches `disconnected` and `connected` events when the subscriber's stream is dropped
-("disconnected") and when it is restored ("connected"):
+In the code snippet below, when the `streamCreated` event occurs (indicating that 
+another client's stream is available in the session), the client subscribes to 
+that stream. The Subscriber object dispatches the `disconnected` event when the 
+subscriber stream is dropped and dispatches the `connected` event when it is restored.
+The client creates a `<div>` element to notify the user when the subscriber is disconnected.
+These elements are initially hidden, and they are hidden again when 
+a subscriber stream is restored.
 
 ```javascript
 session.on({
@@ -124,7 +147,7 @@ session.on({
     var subscriberDisconnectedNotification = document.createElement('div');
     subscriberDisconnectedNotification.className = 'subscriberDisconnectedNotification';
     subscriberDisconnectedNotification.innerText =
-      'Stream disconnected temporarily. Attempting to reconnect.';
+      'Stream has been disconnected unexpectedly. Attempting to automatically reconnect...';
     subscriber.element.appendChild(subscriberDisconnectedNotification);
 
     subscriber.on({
@@ -139,13 +162,11 @@ session.on({
 });
 ```
 
-Note that the app creates DIV elements (`subscriberDisconnectedNotification`) to be made visible
-when the subscriber stream is dropped. These elements are initially hidden, and they are hidden
-again when a subscriber stream is restored.
-
-Finally, note that the object passed into the `Session.signal()` method includes a
-`retryAfterReconnect` property. When set to `false`, signals that are initiated when the client
-is attempting to reconnect are _not_ sent upon reconnection:
+Finally, note that the object passed into the `Session.signal()` method includes 
+a `retryAfterReconnect` property. When set to `false`, signals that are initiated 
+when the client is attempting to reconnect are _not_ sent upon reconnection. If 
+you set it to `true`, signals that are initiated when the client is attempting to 
+reconnect _are_ sent upon reconnection.
 
 ```javascript
 function sendSignal() {
@@ -153,5 +174,6 @@ function sendSignal() {
 }
 ```
 
-The `retrySignalOnReconnect` setting is in the js/config.js file. If you set it to `true`,
-signals that are initiated when the client is attempting to reconnect _are_ sent upon reconnection.
+The `retrySignalOnReconnect` variable is set in the `config.js` file.
+
+ 

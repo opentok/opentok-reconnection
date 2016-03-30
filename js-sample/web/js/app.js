@@ -3,12 +3,12 @@ var session = OT.initSession(apiKey, sessionId);
 session.on({
   sessionReconnecting: function(event) {
     document.getElementById('log').innerText =
-      'Disconnected from the session. Attempting to reconnect.';
+      'Disconnected from the session. Attempting to reconnect...';
   },
   sessionReconnected: function(event) {
     document.getElementById('log').innerText = 'Reconnected to the session.';
   },
-  disconnected: function(event) {
+  sessionDisconnected: function(event) {
     document.getElementById('log').innerText = 'Disconnected from the session.';
   },
   streamCreated: function(event) {
@@ -16,7 +16,7 @@ session.on({
     var subscriberDisconnectedNotification = document.createElement('div');
     subscriberDisconnectedNotification.className = 'subscriberDisconnectedNotification';
     subscriberDisconnectedNotification.innerText =
-      'Stream disconnected temporarily. Attempting to reconnect.';
+      'Stream has been disconnected unexpectedly. Attempting to automatically reconnect...';
     subscriber.element.appendChild(subscriberDisconnectedNotification);
     
     subscriber.on({
