@@ -1,7 +1,7 @@
 OpenTok.js Automatic Reconnection Sample Code
 =============================================
 
-This sample code shows you how to use the Automatic Reconnection feature with the OpenTok.js client SDK.
+This sample code shows you how to use the automatic reconnection feature with the OpenTok.js client SDK.
 
 **Important:** To use this feature, you must contact TokBox to participate in the preview.
 See the main project [README](../README.md) on how to enroll.
@@ -22,8 +22,8 @@ Clients connected to sessions that use the automatic reconnection feature can do
 To configure and try the sample code:
 
 1. In the `web/js/` directory, make a copy of the `sample-config.js` file and rename this 
-   copy as `config.js`. Within the file, set the following variables to your OpenTok API key, 
-   a session ID to use, and a token for that session:
+   copy as `config.js`. Within the file, set the following variables to your developer preview
+   API key, an OpenTok session ID to use, and a token for that session:
 
 	 ```javascript
    var apiKey = 'YOUR-API-KEY';
@@ -32,29 +32,28 @@ To configure and try the sample code:
    ```
 
    Use the API key provided to you for the purposes of this developer preview of the
-   Automatic Reconnections feature. With the API key, you can generate a session ID
+   automatic reconnection feature. With the API key, you can generate a session ID
    and token to use. To obtain an API key, please see the main project [README](../README.md) 
    on how to enroll in this developer preview.
 
-	 For the purposes of quickly demonstrating the Automatic Reconnections functionality
-   through this sample code, we are utilizing the `config.js` file to set an API key, 
-   a session ID and a token to use. However, when deploying your application to production, 
-   you should not hardcode the session ID and token as we do here. Instead, you should 
-   use one of the [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to 
+   For the purposes of quickly demonstrating the automatic reconnection features, this code
+   uses the `config.js` file to set an API key, a session ID and a token to use. However,
+   when deploying your application to production, you should not hardcode the session ID
+   and token as we do here. Instead, you should use one of the
+   [OpenTok Server SDKs](https://tokbox.com/developer/sdks/server/) to
    dynamically generate a session ID and token.
 
-2. In the `web/` directory, open the `index.html` file and look for this particular line
-   below:
+2. In the `web/` directory, open the `index.html` file. Note that the app references the
+   pre-release version of OpenTok.js:
 
    ```html
-   <script src="URL-TO-OPENTOK-JS-SDK" type="text/javascript" charset="utf-8"></script>
+   <sscript src="https://preview.tokbox.com/v2/js/opentok.js" type="text/javascript" charset="utf-8"></script>
    ```
 
-   You will replace this with the URL to the developer preview version of the 
-   OpenTok.js SDK. Refer to the main project [README](../README.md) for more information. 
+   You must use this version to use the automatic reconnection pre-release feature.
 
-3. Install the sample code on a web server. Note that you must load the code from 
-   a web server (you can run a web server locally on your machine and make it accessible at localhost).
+3. Install the sample code on a web server. Note that you must load the code from a web server
+   (you can run a web server locally on your machine and make it accessible at localhost).
    Browsers do not support WebRTC video in pages loaded directly from a file:// URL.
 
 4. In a web browser, navigate to the `index.html` page for the app. The app connects to the
@@ -68,8 +67,8 @@ To configure and try the sample code:
    The Session Status text field shown on the webpage changes to "Disconnected from session. Attempting to
    reconnect..."
 
-7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the displayed text 
-   field changes to "Reconnected to the session."
+7. Reconnect your computer to the network. Upon reconnecting to the OpenTok session, the displayed
+   text field changes to "Reconnected to the session."
 
 Now we will add a second client connected to the session:
 
@@ -175,5 +174,3 @@ function sendSignal() {
 ```
 
 The `retrySignalOnReconnect` variable is set in the `config.js` file.
-
- 

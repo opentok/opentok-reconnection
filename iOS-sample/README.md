@@ -4,7 +4,9 @@ iOS Automatic Reconnection Sample
 This sample shows how to use the OpenTok iOS SDK automatic reconnection beta feature.
 
 *Important* To use this feature, you must contact TokBox to participate in the beta program.
-See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page.
+See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page. Also, you must
+compile your app using the preview version of the OpenTok iOS SDK, available from
+https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1.
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
