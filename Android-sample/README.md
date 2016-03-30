@@ -1,10 +1,12 @@
 Android Automatic Reconnection Sample Code
 ==========================================
 
-This sample code shows you how to use the Automatic Reconnection feature with the OpenTok Android client SDK.
+This sample code shows you how to use the automatic reconnection feature with the OpenTok Android client SDK.
 
 **Important:** To use this feature, you must contact TokBox to participate in the preview.
-See the main project [README](../README.md) on how to enroll.
+See the main project [README](../README.md) on how to enroll. Also, you must compile your app
+using the preview version of the OpenTok Android SDK, available from
+https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1.
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
@@ -30,8 +32,8 @@ To configure and try the sample code:
      click "Import Project".
 
    * For the purposes of this developer preview, you will need to use the developer preview
-     of the OpenTok client-side Android SDK and be enrolled in the Automatic Reconnections Developer Preview.
-     See the main project [README](../README.md) for details.
+     of the OpenTok client-side Android SDK and be enrolled in the automatic reconnection developer
+     preview. See the main project [README](../README.md) for details.
 
    * Unpack the .tar.bz2 file containing the developer preview of the OpenTok client-side Android SDK.
      The resulting .aar should be placed in the `libs` directory of the app module.
@@ -42,7 +44,7 @@ To configure and try the sample code:
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
-   Use the API key provided to you when you enrolled in the Automatic Reconnections Developer Preview.
+   Use the API key provided to you when you enrolled in the automatic reconnection developer preview.
    With the API key, you will use one of our server-side SDKs to generate a session ID and token.
    To learn how, please review the main project [README](../README.md).
 

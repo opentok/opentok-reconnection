@@ -53,7 +53,7 @@ of developers. To be a part of this group, please send the following information
   certain steps in your product/user experience to account for session disconnections?
 
 A developer preview API key and secret will be sent to your contact email. Use this API key
-to evaluate and test the automatic reconnections feature. Reconnection is enabled on demand,
+to evaluate and test the automatic reconnection feature. Reconnection is enabled on demand,
 for a given API key and on the preview environment using preview versions of the OpenTok client
 SDKs (Android, iOS, or JavaScript).
 
@@ -147,4 +147,4 @@ with you. We appreciate if you can provide frequent feedback. In particular we a
 
 * Is the feature performing as you expected?
 
-Send your comments to *automatic-reconnection-beta@tokbox.com*.
+Please send your comments to *automatic-reconnection-beta@tokbox.com*.
