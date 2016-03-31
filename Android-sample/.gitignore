@@ -8,7 +8,4 @@
 
 .idea/
 Android-sample.iml
-app/jniLibs/
-app/libs/
-build.gradle
 gradle/
