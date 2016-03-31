@@ -17,7 +17,7 @@ Clients connected to sessions that use the automatic reconnection feature can do
 
 * Determine whether signals sent while attempting to reconnect to a session are sent upon
   reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).
+  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).)
 
 ## Testing the app
 

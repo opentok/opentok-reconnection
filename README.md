@@ -18,7 +18,7 @@ Clients connected to sessions that use the automatic reconnection feature can do
 
 * Upon a successful reconnection, automatically resend signals that are initiated
   by the client when it was temporarily disconnected. (For more information about Signaling,
-  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/)).
+  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).)
 
 The preview of the automatic reconnection feature is currently available to an initial group of
 developers. To use the preview feature, you need to do the following:
