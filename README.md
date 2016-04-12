@@ -90,7 +90,7 @@ OpenTok opentok = new OpenTok(apiKey, apiSecret, apiUrl);
 ```php
 use OpenTok\OpenTok;
 
-$apiUrl = 'https://anvil-tbdev.opentok.com';
+$apiUrl = 'https://anvil-preview.opentok.com';
 $opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
 ```
 
@@ -99,7 +99,7 @@ $opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
 ```python
 from opentok import OpenTok
 
-api_url = 'https://anvil-tbdev.opentok.com'
+api_url = 'https://anvil-preview.opentok.com'
 opentok = OpenTok(api_key, api_secret, api_url)
 ```
 
@@ -108,7 +108,7 @@ opentok = OpenTok(api_key, api_secret, api_url)
 ```ruby
 require "opentok"
 
-api_url = "https://anvil-tbdev.opentok.com"
+api_url = "https://anvil-preview.opentok.com"
 opentok = OpenTok::OpenTok.new api_key, api_secret, api_url
 ```
 
