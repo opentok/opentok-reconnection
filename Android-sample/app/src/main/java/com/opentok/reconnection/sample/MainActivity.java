@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.opentok.android.BaseVideoRenderer;
+import com.opentok.android.OpenTokConfig;
 import com.opentok.android.OpentokError;
 import com.opentok.android.Publisher;
 import com.opentok.android.PublisherKit;
@@ -27,6 +28,7 @@ import com.opentok.android.Stream;
 import com.opentok.android.Subscriber;
 import com.opentok.android.SubscriberKit;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 
@@ -51,9 +53,9 @@ public class MainActivity extends Activity {
     private SubscriberListener mSubscriberListener;
     private PublisherListener mPublisherListener;
 
-    private static final String SESSION_ID = "";
-    private static final String TOKEN = "";
-    private static final String APIKEY = "";
+    private static final String SESSION_ID = "1_MX40NDkzNTUwMX5-MTQ1OTM4MDY2MjA1Nn43ek1wY1BtVy96UTBUcEMwWUp3Qm0wS3p-fg";
+    private static final String TOKEN = "T1==cGFydG5lcl9pZD00NDkzNTUwMSZzZGtfdmVyc2lvbj10YnBocC12MC45MS4yMDExLTA3LTA1JnNpZz0yMzQ1MzBmZDM3ZDhkMGE0ZDYxNTJiM2YyZmY0NjI5MzcwMGE2ZDk5OnNlc3Npb25faWQ9MV9NWDQwTkRrek5UVXdNWDUtTVRRMU9UTTRNRFkyTWpBMU5uNDNlazF3WTFCdFZ5OTZVVEJVY0VNd1dVcDNRbTB3UzNwLWZnJmNyZWF0ZV90aW1lPTE0NTkzNzg1ODUmcm9sZT1tb2RlcmF0b3Imbm9uY2U9MTQ1OTM3ODU4NS43MzE4MTY2ODEzNDc4MCZleHBpcmVfdGltZT0xNDYxOTcwNTg1";
+    private static final String APIKEY = "44935501";
     private static final boolean SUBSCRIBE_TO_SELF = false;
 
     @Override
@@ -70,7 +72,12 @@ public class MainActivity extends Activity {
         mSubscriberDialog = new ProgressDialog(MainActivity.this);
 
         mStreams = new ArrayList<Stream>();
-
+        try {
+            OpenTokConfig.setJNILogs(true);
+            OpenTokConfig.setAPIRootURL("https://anvil-tbdev.opentok.com");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         sessionConnect();
     }
 
@@ -270,6 +277,7 @@ public class MainActivity extends Activity {
      */
     private BroadcastReceiver mBatteryTracker = new BroadcastReceiver() {
 
+        private  int test = 0;
         public void onReceive(Context context, Intent batteryStatus) {
 
             String action = batteryStatus.getAction();
@@ -286,7 +294,8 @@ public class MainActivity extends Activity {
                 // we will not send this info (retryAfterReconnection to false), because the
                 // battery consumption will not be the same.
                 if (mSession != null ) {
-                    mSession.sendSignal("signal", String.valueOf(batteryUsePct), false);
+                    test++;
+                    mSession.sendSignal("signal", test + " " + String.valueOf(batteryUsePct), false);
                 }
             }
         }
