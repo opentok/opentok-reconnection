@@ -25,10 +25,11 @@ developers. To use the preview feature, you need to do the following:
 
 * Join the preview program
 
-* Modify your server-side code that uses the OpenTok server SDKs to use the OpenTok preview servers.
-  (The preview feature is not available using the standard OpenTok servers.)
+* Use a preview version of the OpenTok client SDK
 
-* Use a preview version of the OpenTok client SDK.
+* Modify your server-side code to use the OpenTok preview servers
+
+* Send us your feedback
 
 See the following sections for details.
 
@@ -59,6 +60,21 @@ SDKs (Android, iOS, or JavaScript).
 
 Once you receive your developer preview API key and secret, you will need to make some changes
 to the OpenTok server-side and client code used by your app (see the following sections).
+
+
+## Using a preview version of the OpenTok client SDK
+
+This repository includes samples for the OpenTok automatic reconnection beta feature and for each of the OpenTok client SDKs. See the Android-sample, iOS-sample, and js-sample subdirectories.
+
+To use  developer preview, you will need to use the developer preview version of the OpenTokSDK
+client-side SDK:
+
+* Android SDK: https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
+
+* iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
+
+* JS SDK: https://preview.tokbox.com/v2/js/opentok.js
+
 
 ## Modifying your server-side code
 
@@ -123,28 +139,15 @@ string ApiUrl = "https://anvil-preview.opentok.com";
 var OpenTok = new OpenTok(ApiKey, ApiSecret, ApiUrl);
 ```
 
-## Using a preview version of the OpenTok client SDK
+## Sending us feedback
 
-This repository includes samples for the OpenTok automatic reconnection beta feature and for each of the OpenTok client SDKs. See the Android-sample, iOS-sample, and js-sample subdirectories.
+As you use the preview feature, we would like to have your feedback and comments. In particular, we are trying to answer the following questions:
 
-To use  developer preview, you will need to use the developer preview version of the OpenTokSDK
-client-side SDK:
-
-* Android SDK: https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
-
-* iOS SDK: https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
-
-* JS SDK: https://preview.tokbox.com/v2/js/opentok.js
-
-## Send us feedback
-
-As you use the preview feature, we would like to have an agile communication and development cycle
-with you. We appreciate if you can provide frequent feedback. In particular we are trying to answer the following questions:
-
-* Are we solving the connectivity problem?
+* Are we solving your connectivity problem?
 
 * Is the API solving your use case?
 
 * Is the feature performing as you expected?
 
-Please send your comments to *automatic-reconnection-beta@tokbox.com*.
+Please send us your comments at *automatic-reconnection-beta@tokbox.com*.
+
