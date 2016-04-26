@@ -3,10 +3,11 @@ Android Automatic Reconnection Sample Code
 
 This sample code shows you how to use the automatic reconnection feature with the OpenTok Android client SDK.
 
-**Important:** To use this feature, you must contact TokBox to participate in the preview.
-See the main project [README](../README.md) on how to enroll. Also, you must compile your app
-using the preview version of the OpenTok Android SDK, available from
-https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1.
+**Important:** To use this feature, you must contact TokBox to participate in this developer preview.
+See the main project [README](../README.md) on how to enroll.
+
+For the purposes of this developer preview, you will need to use the developer preview version of
+the Android client-side SDK from https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
 
 Clients connected to sessions that use the automatic reconnection feature can do the following:
 
@@ -25,8 +26,6 @@ To configure and try the sample code:
 
 1. Import the project into Android Studio.
 
-   To import the project directly into Android Studio:
-
    * In Android Studio, choose *File > New > Import Project* and choose the `settings.gradle` file in
      the `Android-sample` directory. Or, if you are viewing the Android Studio welcome screen,
      click "Import Project".
@@ -35,8 +34,8 @@ To configure and try the sample code:
      of the OpenTok client-side Android SDK and be enrolled in the automatic reconnection developer
      preview. See the main project [README](../README.md) for details.
 
-   * Unpack the .tar.bz2 file containing the developer preview of the OpenTok client-side Android SDK.
-     The resulting .aar should be placed in the `libs` directory of the app module.
+   * The developer preview of the OpenTok client-side Android SDK will be in the form of an `.aar` file.
+     The resulting `.aar` file should be placed in the `libs` directory of the app module.
 
 2. Configure the project to use your own OpenTok session and token:
 
