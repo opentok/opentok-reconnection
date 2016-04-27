@@ -17,15 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    sourceSets {
-        main {
-            jniLibs.srcDir 'jniLibs'
-        }
-    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.opentok.android:opentok-android-sdk-preview:2.9.+'
     compile 'com.android.support:appcompat-v7:23.1.0'
 }
