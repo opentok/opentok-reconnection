@@ -90,8 +90,10 @@ OpenTok opentok = new OpenTok(apiKey, apiSecret, apiUrl);
 ```php
 use OpenTok\OpenTok;
 
-$apiUrl = 'https://anvil-preview.opentok.com';
-$opentok = new OpenTok($apiKey, $apiSecret, $apiUrl);
+$options = array(
+    'apiUrl' => 'https://anvil-preview.opentok.com'
+);
+$opentok = new OpenTok($apiKey, $apiSecret, $options);
 ```
 
 ##### Python
