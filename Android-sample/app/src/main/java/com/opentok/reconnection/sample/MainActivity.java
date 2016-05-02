@@ -1,14 +1,19 @@
 package com.opentok.reconnection.sample;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +21,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.opentok.android.BaseVideoRenderer;
 import com.opentok.android.OpentokError;
@@ -30,9 +34,11 @@ import com.opentok.android.SubscriberKit;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+    implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String LOGTAG = "demo-reconnection";
+    private static final int OT_AUDIO_VIDEO_PERMISSIONS = 1;
     private Session mSession;
     private Publisher mPublisher;
     private Subscriber mSubscriber;
@@ -46,6 +52,7 @@ public class MainActivity extends Activity {
     private ProgressBar mLoadingSub;
     private ProgressDialog mSessionDialog;
     private ProgressDialog mSubscriberDialog;
+    private AlertDialog mPermissionsDialog;
 
     private SessionListener mSessionListener;
     private SubscriberListener mSubscriberListener;
@@ -68,10 +75,11 @@ public class MainActivity extends Activity {
         mLoadingSub = (ProgressBar) findViewById(R.id.loadingSpinner);
         mSessionDialog = new ProgressDialog(MainActivity.this);
         mSubscriberDialog = new ProgressDialog(MainActivity.this);
+        mPermissionsDialog = null;
 
         mStreams = new ArrayList<Stream>();
 
-        sessionConnect();
+        sessionInit();
     }
 
     @Override
@@ -158,6 +166,25 @@ public class MainActivity extends Activity {
         }, 500);
     }
 
+
+    private void sessionInit() {
+        // check for permissions "android.permission.CAMERA", "android.permission.RECORD_AUDIO"
+        int cameraPermissionCheck = ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CAMERA);
+        int audioPermissionCheck = ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.RECORD_AUDIO);
+
+        if ((cameraPermissionCheck != PackageManager.PERMISSION_GRANTED)
+                || (audioPermissionCheck != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO},
+                    OT_AUDIO_VIDEO_PERMISSIONS);
+        }
+        else {
+            sessionConnect();
+        }
+    }
+
     private void sessionConnect() {
         if (mSession == null) {
             mSessionListener = new SessionListener();
@@ -168,6 +195,25 @@ public class MainActivity extends Activity {
             mSession.connect(TOKEN);
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case OT_AUDIO_VIDEO_PERMISSIONS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted
+                    sessionConnect();
+                } else {
+                    // permission denied
+                    showPermissionsDialog();
+                }
+            }
+        }
+    }
+
 
 
     private void subscribeToStream(Stream stream) {
@@ -218,7 +264,7 @@ public class MainActivity extends Activity {
         mPublisherViewContainer.addView(mPublisher.getView(), layoutParams);
     }
 
-    private void showReconnectionDialog(boolean show){
+    private void showReconnectionDialog(boolean show) {
         if (show) {
             mSessionDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mSessionDialog.setMessage("Reconnecting. Please wait...");
@@ -236,7 +282,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void showSubscriberReconnectionDialog(boolean show){
+    private void showSubscriberReconnectionDialog(boolean show) {
         if (show) {
             mSubscriberDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             mSubscriberDialog.setMessage("Subscriber is reconnecting. Please wait...");
@@ -253,6 +299,29 @@ public class MainActivity extends Activity {
             builder.show();
         }
     }
+
+    private void showPermissionsDialog() {
+        if (mPermissionsDialog != null) {
+            mPermissionsDialog.show();
+            return;
+        }
+
+        mPermissionsDialog = new AlertDialog.Builder(
+                                MainActivity.this).create();
+        mPermissionsDialog.setTitle("Permissions Needed");
+        mPermissionsDialog.setMessage("You need to grant this sample app both the Camera and Audio Recording Permissions for it to work.");
+        mPermissionsDialog.setCancelable(false);
+        mPermissionsDialog.setCanceledOnTouchOutside(false);
+        mPermissionsDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mPermissionsDialog.dismiss();
+                                        sessionInit();
+                                    }
+                                });
+        mPermissionsDialog.show();
+    }
+
 
     /**
      * Converts dp to real pixels, according to the screen density.
