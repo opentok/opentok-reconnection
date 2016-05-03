@@ -1,15 +1,12 @@
 Android Automatic Reconnection Sample Code
 ==========================================
 
-This sample code shows you how to use the automatic reconnection feature with the OpenTok Android client SDK.
+This sample code shows you how to use the OpenTok Automatic Reconnection feature on Android.
 
 **Important:** To use this feature, you must contact TokBox to participate in this developer preview.
 See the main project [README](../README.md) on how to enroll.
 
-For the purposes of this developer preview, you will need to use the developer preview version of
-the Android client-side SDK from https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1
-
-Clients connected to sessions that use the automatic reconnection feature can do the following:
+Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
 * Attempt to automatically reconnect to the session if the client has disconnected due
   to a temporary drop in network connectivity.
@@ -30,12 +27,8 @@ To configure and try the sample code:
      the `Android-sample` directory. Or, if you are viewing the Android Studio welcome screen,
      click "Import Project".
 
-   * For the purposes of this developer preview, you will need to use the developer preview
-     of the OpenTok client-side Android SDK and be enrolled in the automatic reconnection developer
-     preview. See the main project [README](../README.md) for details.
-
-   * The developer preview of the OpenTok client-side Android SDK will be in the form of an `.aar` file.
-     The resulting `.aar` file should be placed in the `libs` directory of the app module.
+   * For the purposes of this developer preview, you will need to be enrolled in the Automatic 
+     Reconnection developer preview. See the main project [README](../README.md) for details.
 
 2. Configure the project to use your own OpenTok session and token:
 
@@ -43,7 +36,7 @@ To configure and try the sample code:
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
-   Use the API key provided to you when you enrolled in the automatic reconnection developer preview.
+   Use the API key provided to you when you enrolled in the Automatic Reconnections developer preview.
    With the API key, you will use one of our server-side SDKs to generate a session ID and token.
    To learn how, please review the main project [README](../README.md).
 
