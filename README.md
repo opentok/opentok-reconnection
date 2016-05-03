@@ -4,7 +4,7 @@ opentok-reconnection
 This project contains sample code demonstrating the [OpenTok](https://tokbox.com/developer/)
 Automatic Reconnection feature.
 
-With Automatic Reconnections, your client can now automatically reconnect to OpenTok sessions
+With Automatic Reconnection, your client can now automatically reconnect to OpenTok sessions
 after temporary drops in network connectivity. If you have a mobile client using OpenTok, the
 feature helps restore connectivity during transitions between network interfaces such as Wi-Fi
 and LTE, allowing you to build a more robust integration and end-user experience.
@@ -44,7 +44,7 @@ of developers. To be a part of this group, please send the following information
 * List the platforms (Android, iOS, Web, etc.) on which your product uses OpenTok.
 
 * Explain the current problems that you have you hope would be solved with Automatic
-  Reconnections.
+  Reconnection.
 
 * Are session disconnections a common issue for your product experience with OpenTok?
   In your own investigations, what have been common causes for these disconnections?

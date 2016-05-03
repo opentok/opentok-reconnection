@@ -36,7 +36,7 @@ To configure and try the sample code:
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
-   Use the API key provided to you when you enrolled in the Automatic Reconnections developer preview.
+   Use the API key provided to you when you enrolled in the Automatic Reconnection developer preview.
    With the API key, you will use one of our server-side SDKs to generate a session ID and token.
    To learn how, please review the main project [README](../README.md).
 
