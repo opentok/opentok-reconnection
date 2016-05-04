@@ -1,25 +1,26 @@
 iOS Automatic Reconnection Sample
 =================================
 
-This sample shows how to use the OpenTok iOS SDK automatic reconnection beta feature.
+This sample shows how to use the OpenTok Automatic Reconnection feature on iOS.
 
-*Important* To use this feature, you must contact TokBox to participate in the beta program.
-See the [OpenTok beta programs](https://tokbox.com/platform/beta-programs) page. Also, you must
-compile your app using the preview version of the OpenTok iOS SDK, available from
-https://mobile-meet.tokbox.com/latest?product=otkit-android-sdk&redirect=1.
+**Important** To use this feature, you must contact TokBox to participate in this developer preview.
+See the main project [README](../README.md) on how to enroll.
 
-Clients connected to sessions that use the automatic reconnection feature can do the following:
+Also, you must use a preview version of the OpenTok iOS SDK, available from 
+https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
 
-* Attempt to reconnect to the session if the client has disconnected due to a temporary drop in
-  network connectivity.
+Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
-* Attempt to reconnect to a stream it is subscribing to that is temporarily dropped.
+* Attempt to automatically reconnect to the session if the client has disconnected due to a 
+  temporary drop in network connectivity.
 
-* Determine whether signals sent while attempting to reconnect to a session are sent upon
-  reconnection (or not). (For more information, see the
-  [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).)
+* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
-## Testing the app
+* Upon a successful reconnection, automatically resend signals that are initiated
+  by the client when it was temporarily disconnected. (For more information about Signaling,
+  see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/).)
+
+## Trying the sample code
 
 Install the required CocoaPod dependencies and add some settings for the app:
 
@@ -29,17 +30,14 @@ Install the required CocoaPod dependencies and add some settings for the app:
   pod install
   ```
 
-2. Open the Reconnection sample.xcworkspace file in Xcode.
+2. Open the `Reconnection sample.xcodeproj` file in Xcode.
 
-3. In the VideoController.m file, set values for the `kApiKey`, `kSessionId`,
-   and `kToken` constants. For testing, you can obtain these values at the
-   [OpenTok dashboard](https://dashboard.tokbox.com/users/sign_in). In a production application,
-   use one of the [OpenTok server SDKs](https://tokbox.com/developer/sdks/server/) to generate
-   session IDs and tokens.
+3. In the `VideoController.m file`, set values for the `kApiKey`, `kSessionId`,
+   and `kToken` constants to your own session ID, token, and API key respectively.
 
-   For more information, see the OpenTok
-   [Session Creation Overview](https://tokbox.com/developer/guides/create-session/) and the
-   [Token Creation Overview](https://tokbox.com/developer/guides/create-token/).
+   Use the API key provided to you when you enrolled in the Automatic Reconnection developer preview.
+   With the API key, you will use one of our server-side SDKs to generate a session ID and token.
+   To learn how, please review the main project [README](../README.md).
 
 4. Debug the app on your device or using the Xcode iOS Simulator. 
 
@@ -71,20 +69,21 @@ Now we will add a second client connected to the session:
 
 Finally, the app shows how to disable
 [OpenTok signaling](https://tokbox.com/developer/guides/signaling/ios/) while reconnecting
-to a session:
-
-1. The app sends a signal when the battery usage on the device changes. However, if the signal is
-   initiated while the app is disconnected from the session, it will not be sent. (You can also
-   have an app send signals initiated while reconnecting; the signals are sent when it reconnects.)
+to a session. The app sends a signal when the battery usage on the device changes. 
+However, if the signal is initiated while the app is disconnected from the session, 
+it will not be sent. You can also have an app send signals while it is still in the 
+process of reconnecting; the signals are sent when the app successfully reconnects 
+to the session.
 
 ## Understanding the code
 
-Open the ViewController.m file. When the main view loads, ViewController object connects to
+Open the `ViewController.m` file. When the main view loads, the ViewController object connects to
 the OpenTok session.
 
-The ViewController class implements the OTSessionDelegate protocol (defined in the OpenTok iOS SDK).
+The ViewController class implements the OTSessionDelegate protocol defined in the OpenTok iOS SDK.
 This protocol includes methods that are called when the client is attempting to reconnect to the
-session and when it successfully reconnects:
+session and when it successfully reconnects. In the methods below, the code displays and hides an 
+alert with the message "Session is reconnecting".
 
 ```objc
 - (void)sessionDidBeginReconnecting:(OTSession *)session
@@ -98,11 +97,9 @@ session and when it successfully reconnects:
 }
 ```
 
-The code displays and hides the session reconnecting alert when these messages are sent.
-
-The ViewController class also implements the OTSubscriberDelegate protocol (defined in the OpenTok
-iOS SDK). This protocol includes methods that are called when the subscriber's stream is dropped
-("disconnected") and when it is restored ("reconnected").:
+The ViewController class also implements the OTSubscriberDelegate protocol defined in the OpenTok
+iOS SDK. This protocol includes methods that are called when the subscriber stream is dropped
+("disconnected") and when it is restored ("reconnected").
 
 ```objc
 - (void)subscriberDidDisconnectFromStream:(OTSubscriberKit *)subscriber
@@ -119,10 +116,9 @@ iOS SDK). This protocol includes methods that are called when the subscriber's s
 ```
 
 Finally, note that the `[OTSession signalWithType:string:connection:retryAfterReconnect:error:]`
-method (defined in the OpenTok iOS SDK) includes a `retryAfterReconnect` parameter. When set
-to `NO`, signals that are initiated when the client is attempting to reconnect are _not_ sent
-upon reconnection. This is illustrated in the code that sends a signal when the battery level
-changes:
+method includes a `retryAfterReconnect` parameter. When set to `NO`, signals that are initiated 
+when the client is attempting to reconnect are _not_ sent upon reconnection. This is illustrated 
+in the code below that sends a signal when the battery level changes.
 
 ```objc
 - (void)batteryLevelChanged:(NSNotification *)notification

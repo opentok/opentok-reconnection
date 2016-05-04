@@ -1,12 +1,12 @@
 OpenTok.js Automatic Reconnection Sample Code
 =============================================
 
-This sample code shows you how to use the automatic reconnection feature with the OpenTok.js client SDK.
+This sample code shows you how to use the OpenTok Automatic Reconnection feature on the web.
 
-**Important:** To use this feature, you must contact TokBox to participate in the preview.
+**Important:** To use this feature, you must contact TokBox to participate in this developer preview.
 See the main project [README](../README.md) on how to enroll.
 
-Clients connected to sessions that use the automatic reconnection feature can do the following:
+Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
 * Attempt to automatically reconnect to the session if the client has disconnected due 
   to a temporary drop in network connectivity.
@@ -32,11 +32,11 @@ To configure and try the sample code:
    ```
 
    Use the API key provided to you for the purposes of this developer preview of the
-   automatic reconnection feature. With the API key, you can generate a session ID
+   Automatic Reconnection feature. With the API key, you can generate a session ID
    and token to use. To obtain an API key, please see the main project [README](../README.md) 
    on how to enroll in this developer preview.
 
-   For the purposes of quickly demonstrating the automatic reconnection features, this code
+   For the purposes of quickly demonstrating the Automatic Reconnection feature, this sample code
    uses the `config.js` file to set an API key, a session ID and a token to use. However,
    when deploying your application to production, you should not hardcode the session ID
    and token as we do here. Instead, you should use one of the
@@ -44,13 +44,13 @@ To configure and try the sample code:
    dynamically generate a session ID and token.
 
 2. In the `web/` directory, open the `index.html` file. Note that the app references the
-   pre-release version of OpenTok.js:
+   developer preview version of OpenTok.js:
 
    ```html
    <sscript src="https://preview.tokbox.com/v2/js/opentok.js" type="text/javascript" charset="utf-8"></script>
    ```
 
-   You must use this version to use the automatic reconnection pre-release feature.
+   You must use this version to use the Automatic Reconnection feature.
 
 3. Install the sample code on a web server. Note that you must load the code from a web server
    (you can run a web server locally on your machine and make it accessible at localhost).
