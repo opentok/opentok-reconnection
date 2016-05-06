@@ -17,6 +17,18 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
   by the client when it was temporarily disconnected. (For more information about Signaling,
   see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/).)
 
+## Client requirements
+
+You will be using a developer preview of the OpenTok Android SDK, which is supported on 
+high-speed Wi-Fi and 4G LTE networks. A remote Maven repository link has been configured 
+in the `build.gradle` file in this directory, and will pull in the latest developer preview 
+of the OpenTok Android SDK as part of each clean build process. 
+
+The OpenTok Android SDK is only supported on armeabi, armeabi-v7a, and x86 architectures.
+For a list of supported devices, see the 
+[Developer and client requirements](http://tokbox.com/developer/sdks/android/#developer-and-client-requirements)
+section of the OpenTok Android SDK page at the TokBox website.
+
 ## Trying the sample code
 
 To configure and try the sample code:
