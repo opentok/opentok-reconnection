@@ -6,6 +6,9 @@ This sample code shows you how to use the OpenTok Automatic Reconnection feature
 **Important:** To use this feature, you must contact TokBox to participate in this developer preview.
 See the main project [README](../README.md) on how to enroll.
 
+**Known issue:** Automatic reconnection does not currently work in Firefox. This is due to
+a known issue in Firefox, which Mozilla is working on.
+
 Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
 * Attempt to automatically reconnect to the session if the client has disconnected due 
