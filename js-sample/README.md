@@ -3,12 +3,6 @@ OpenTok.js Automatic Reconnection Sample Code
 
 This sample code shows you how to use the OpenTok Automatic Reconnection feature on the web.
 
-**Important:** To use this feature, you must contact TokBox to participate in this developer preview.
-See the main project [README](../README.md) on how to enroll.
-
-**Known issue:** Automatic reconnection does not currently work in Firefox. This is due to
-a known issue in Firefox, which Mozilla is working on.
-
 Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
 * Attempt to automatically reconnect to the session if the client has disconnected due 
@@ -20,12 +14,19 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
   by the client when it was temporarily disconnected. (For more information about Signaling, 
   see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/js/).)
 
+**Important:** To use this feature, you must contact TokBox to enroll in the Automatic Reconnection beta.
+See the main project [README](../README.md) on how to enroll.
+
+**Known issues:** The OpenTok Automatic Reconnection feature does not currently work in Firefox. 
+This is due to a known issue with offline mode in Firefox, which Mozilla is working on.
+
+
 ## Trying the sample code
 
 To configure and try the sample code:
 
 1. In the `web/js/` directory, make a copy of the `sample-config.js` file and rename this 
-   copy as `config.js`. Within the file, set the following variables to your developer preview
+   copy as `config.js`. Within the file, set the following variables to your
    API key, an OpenTok session ID to use, and a token for that session:
 
 	 ```javascript
@@ -34,10 +35,9 @@ To configure and try the sample code:
    var token = 'YOUR-SESSION-TOKEN';
    ```
 
-   Use the API key provided to you for the purposes of this developer preview of the
-   Automatic Reconnection feature. With the API key, you can generate a session ID
-   and token to use. To obtain an API key, please see the main project [README](../README.md) 
-   on how to enroll in this developer preview.
+   Your API key must be enrolled in the Automatic Reconnection beta. 
+   To enroll an API key for this beta, please see the main project [README](../README.md) 
+   for details.
 
    For the purposes of quickly demonstrating the Automatic Reconnection feature, this sample code
    uses the `config.js` file to set an API key, a session ID and a token to use. However,
@@ -47,15 +47,15 @@ To configure and try the sample code:
    dynamically generate a session ID and token.
 
 2. In the `web/` directory, open the `index.html` file. Note that the app references the
-   developer preview version of OpenTok.js:
+   latest version of OpenTok.js:
 
    ```html
-   <sscript src="https://preview.tokbox.com/v2/js/opentok.js" type="text/javascript" charset="utf-8"></script>
+   <script src='//static.opentok.com/v2/js/opentok.min.js'></script>   
    ```
 
-   You must use this version to use the Automatic Reconnection feature.
+   You must use the most recent version to use the Automatic Reconnection feature.
 
-3. Install the sample code on a web server. Note that you must load the code from a web server
+3. Host the sample code and webpage on a web server. Note that you must load the webpage from a web server
    (you can run a web server locally on your machine and make it accessible at localhost).
    Browsers do not support WebRTC video in pages loaded directly from a file:// URL.
 
