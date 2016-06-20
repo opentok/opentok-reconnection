@@ -33,8 +33,8 @@ See the following sections for details.
 
 ## Joining the beta
 
-We are making a preview of the Automatic Reconnection feature available to an initial group
-of developers. To be a part of this group, please send the following information to
+To join the open beta for the Automatic Reconnection feature, 
+please send the following information to 
 *automatic-reconnection-beta@tokbox.com*:
 
 * Provide your preferred contact email for this beta.
