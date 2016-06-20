@@ -17,8 +17,9 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
 **Important:** To use this feature, you must contact TokBox to enroll in the Automatic Reconnection beta.
 See the main project [README](../README.md) on how to enroll.
 
-**Known issues:** The OpenTok Automatic Reconnection feature does not currently work in Firefox. 
-This is due to a known issue with offline mode in Firefox, which Mozilla is working on.
+**Known issues:** The OpenTok Automatic Reconnection feature does not currently work in Firefox.
+This is due to a known issue with offline mode and peer connections in Firefox 
+(see https://bugzilla.mozilla.org/show_bug.cgi?id=1276559), which Mozilla is working on.
 
 
 ## Trying the sample code

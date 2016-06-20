@@ -1,8 +1,6 @@
 
 #import "ViewController.h"
 
-// *** Fill the following variables using your own Project info  ***
-// ***          https://dashboard.tokbox.com/projects            ***
 // Replace with your OpenTok API key
 static NSString* const kApiKey = @"";
 // Replace with your generated session ID

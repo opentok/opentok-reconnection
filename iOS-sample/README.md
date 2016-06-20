@@ -1,24 +1,21 @@
-iOS Automatic Reconnection Sample
-=================================
+iOS Automatic Reconnection Sample Code
+======================================
 
-This sample shows how to use the OpenTok Automatic Reconnection feature on iOS.
-
-**Important** To use this feature, you must contact TokBox to participate in this developer preview.
-See the main project [README](../README.md) on how to enroll.
-
-Also, you must use a preview version of the OpenTok iOS SDK, available from 
-https://mobile-meet.tokbox.com/latest?product=otkit-ios-sdk&redirect=1
+This sample code shows you how to use the OpenTok Automatic Reconnection feature on iOS.
 
 Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
-* Attempt to automatically reconnect to the session if the client has disconnected due to a 
-  temporary drop in network connectivity.
+* Attempt to automatically reconnect to the session if the client has disconnected due 
+  to a temporary drop in network connectivity.
 
 * Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
 
 * Upon a successful reconnection, automatically resend signals that are initiated
   by the client when it was temporarily disconnected. (For more information about Signaling,
   see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/).)
+
+**Important:** To use this feature, you must contact TokBox to enroll in the Automatic Reconnection beta.
+See the main project [README](../README.md) on how to enroll.
 
 ## Trying the sample code
 
@@ -35,9 +32,9 @@ Install the required CocoaPod dependencies and add some settings for the app:
 3. In the `VideoController.m file`, set values for the `kApiKey`, `kSessionId`,
    and `kToken` constants to your own session ID, token, and API key respectively.
 
-   Use the API key provided to you when you enrolled in the Automatic Reconnection developer preview.
-   With the API key, you will use one of our server-side SDKs to generate a session ID and token.
-   To learn how, please review the main project [README](../README.md).
+   Your API key must be enrolled in the Automatic Reconnection beta in order to use this
+   feature. To enroll an API key for this beta, please review the main project [README](../README.md)
+   for details.
 
 4. Debug the app on your device or using the Xcode iOS Simulator. 
 
