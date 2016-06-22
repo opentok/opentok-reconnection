@@ -2,10 +2,9 @@
 // Then replace the following values with your OpenTok API key
 // as well as a test session ID and token.
 //
-// Use the API key provided to you for the purposes of this developer
-// preview of the automatic reconnection feature. With the API key,
-// you can generate a session ID and token to use. To obtain an API key,
-// please see https://github.com/opentok/opentok-reconnection
+// The API key used needs to be enrolled in the Automatic Reconnection
+// beta, please see https://github.com/opentok/opentok-reconnection
+// on how to enroll.
 //
 // For the purposes of quickly demonstrating the automatic reconnection
 // functionality through this sample code, we are utilizing the 'config.js'
@@ -13,6 +12,8 @@
 // deploying your application to production, you should not hardcode the
 // session ID and token as we do here. Instead, you shoud use one of the
 // OpenTok Server SDKs to dynamically generate a session ID and token.
+// See https://tokbox.com/developer/sdks/server/ on how to use and deploy
+// an OpenTok Server SDK.
 
 var apiKey = 'YOUR-API-KEY';
 var sessionId = 'YOUR-SESSION-ID';
