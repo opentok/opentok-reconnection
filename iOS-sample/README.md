@@ -14,9 +14,6 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
   by the client when it was temporarily disconnected. (For more information about Signaling,
   see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/).)
 
-**Important:** To use this feature, you must contact TokBox to enroll in the Automatic Reconnection beta.
-See the main project [README](../README.md) on how to enroll.
-
 ## Trying the sample code
 
 Install the required CocoaPod dependencies and add some settings for the app:
@@ -31,10 +28,6 @@ Install the required CocoaPod dependencies and add some settings for the app:
 
 3. In the `VideoController.m file`, set values for the `kApiKey`, `kSessionId`,
    and `kToken` constants to your own session ID, token, and API key respectively.
-
-   Your API key must be enrolled in the Automatic Reconnection beta in order to use this
-   feature. To enroll an API key for this beta, please review the main project [README](../README.md)
-   for details.
 
 4. Debug the app on your device or using the Xcode iOS Simulator. 
 
