@@ -9,9 +9,6 @@ after temporary drops in network connectivity. If you have a mobile client using
 feature helps restore connectivity during transitions between network interfaces such as Wi-Fi
 and LTE, allowing you to build a more robust integration and end-user experience.
 
-Automatic reconnection is available to OpenTok sessions that use the the [OpenTok Media
-Router](https://tokbox.com/developer/guides/create-session/#media-mode).
-
 Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
 * Attempt to automatically reconnect to the session if the client has disconnected due
