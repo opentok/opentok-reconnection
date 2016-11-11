@@ -2,10 +2,6 @@
 // Then replace the following values with your OpenTok API key
 // as well as a test session ID and token.
 //
-// The API key used needs to be enrolled in the Automatic Reconnection
-// beta, please see https://github.com/opentok/opentok-reconnection
-// on how to enroll.
-//
 // For the purposes of quickly demonstrating the automatic reconnection
 // functionality through this sample code, we are utilizing the 'config.js'
 // file to set an API key, session ID and token to use. However, when
