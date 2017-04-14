@@ -66,9 +66,9 @@ static double widgetWidth = 320;
 
 - (void)doPublish
 {
-    OTPublisherSettings *setting = [[OTPublisherSettings alloc] init];
-    setting.name = [UIDevice currentDevice].name;
-    self.publisher = [[OTPublisher alloc] initWithDelegate:self settings:setting];
+    OTPublisherSettings *settings = [[OTPublisherSettings alloc] init];
+    settings.name = [UIDevice currentDevice].name;
+    self.publisher = [[OTPublisher alloc] initWithDelegate:self settings:settings];
     
     OTError *error = nil;
     [self.session publish:self.publisher error:&error];
