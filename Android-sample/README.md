@@ -1,27 +1,28 @@
-Android Automatic Reconnection Sample Code
-==========================================
+# Android Automatic Reconnection Sample Code
 
 This sample code shows you how to use the OpenTok Automatic Reconnection feature on Android.
 
 Clients connected to sessions that use the Automatic Reconnection feature can do the following:
 
-* Attempt to automatically reconnect to the session if the client has disconnected due
-  to a temporary drop in network connectivity.
+- Attempt to automatically reconnect to the session if the client has disconnected due
+  to a temporary drop in local network connectivity.
 
-* Attempt to automatically reconnect to a subscriber stream that is temporarily dropped.
+- Attempt to automatically reconnect to a subscriber stream that is temporarily dropped , locally.
 
-* Upon a successful reconnection, automatically resend signals that are initiated
+In both of the above cases, the callbacks are not indicative of the remote clients/publishers. The callbacks are indicative of what is happening on **your** network only (locally) . This distinction is made because it may sometime happen that your subscriber is dropped but the session connection is still active.
+
+- Upon a successful reconnection, automatically resend signals that are initiated
   by the client when it was temporarily disconnected. (For more information about Signaling,
   see the [Signaling developer guide](https://tokbox.com/developer/guides/signaling/android/).)
 
 ## Client requirements
 
-You must use the most recent version of the OpenTok Android SDK, which is supported on 
-high-speed Wi-Fi and 4G LTE networks. A remote Maven repository link has been configured 
+You must use the most recent version of the OpenTok Android SDK, which is supported on
+high-speed Wi-Fi and 4G LTE networks. A remote Maven repository link has been configured
 in the `build.gradle` file in this directory, and will pull in the latest release
-of the OpenTok Android SDK as part of each clean build process. 
+of the OpenTok Android SDK as part of each clean build process.
 
-For a list of supported devices, see the 
+For a list of supported devices, see the
 [Developer and client requirements](http://tokbox.com/developer/sdks/android/#developer-and-client-requirements)
 section of the OpenTok Android SDK page at the TokBox website.
 
@@ -31,13 +32,13 @@ To configure and try the sample code:
 
 1. Import the project into Android Studio:
 
-   In Android Studio, choose *File > New > Import Project* and choose the `settings.gradle` file in
+   In Android Studio, choose _File > New > Import Project_ and choose the `settings.gradle` file in
    the `Android-sample` directory. Or, if you are viewing the Android Studio welcome screen,
    click "Import Project".
 
 2. Configure the project to use your own OpenTok API key, session ID and token:
 
-   Open the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package) and set
+   Open the `MainActivity.java` file (in the _com.opentok.reconnection.sample_ package) and set
    the `SESSION_ID`, `TOKEN`, and `APIKEY` strings to your own session ID, token, and API key
    respectively.
 
@@ -52,27 +53,12 @@ To configure and try the sample code:
    on your device.
 
    The app displays an Android [ProgressDialog](http://developer.android.com/reference/android/app/ProgressDialog.html)
-   with the message "Reconnecting. Please wait....". It also logs "Reconnecting to the session" 
-   to the debug console.
+   with the message "Reconnecting. Please wait....". It also logs "Reconnecting to the session"
+   to the debug console. It will also display the message "Subscriber has been disconnected by connection error" for the subscriber.
 
-6. Enable internet access for your device, this time preferably on your mobile data network. 
-   Upon reconnecting to the OpenTok session, the app hides the ProgressDialog and logs 
-   "Session has been reconnected" to the debug console.
-
-Now we will add a second client to the session:
-
-1. Install and run the app on another Android device. Or run one instance in a supported Android
-   emulator and run another on a device. Mute the speakers so that you will not receive audio
-   feedback.
-
-2. Disconnect the internet connection on the second device/client while keeping the original 
-   first device connected to the debug console. From the first client, after 30 seconds or so,  you will now notice that
-   the message "Subscriber has been disconnected by connection error" has been logged to the 
-   debug console.
-
-5. Reconnect the second device/client to the network. When the subscriber on the first client 
-   successfully reconnects to the stream, a Toast message "Subscriber has been reconnected"
-   will be displayed and the same message is logged to the ebug console.
+6. Enable internet access for your device, this time preferably on your mobile data network.
+   Upon reconnecting to the OpenTok session, the app hides the ProgressDialog and logs
+   "Session has been reconnected" to the debug console. It will also display the message "Subscriber has been reconnected" for the subscriber.
 
 Finally, the sample code shows how to disable
 [OpenTok signaling](https://tokbox.com/developer/guides/signaling/android/) while reconnecting
@@ -84,8 +70,8 @@ to a session:
 
 ## Understanding the code
 
-Locate the `MainActivity.java` file (in the *com.opentok.reconnection.sample* package). 
-The MainActivity class connects to the OpenTok session, and adds a SessionListener 
+Locate the `MainActivity.java` file (in the _com.opentok.reconnection.sample_ package).
+The MainActivity class connects to the OpenTok session, and adds a SessionListener
 object to act as the
 SessionListener and Session.ReconnectionListener for the Session object:
 
@@ -132,7 +118,7 @@ mSubscriber.setStreamListener(mSubscriberListener);
 
 The SubscriberListener class (defined in the `MainActivity.java` file), implements the
 `SubscriberKit.StreamListener.onReconnected(SubscriberKit subscriberKit)` and
-`SubscriberKit.StreamListener.onDisconnected(SubscriberKit subscriberKit)` methods of the 
+`SubscriberKit.StreamListener.onDisconnected(SubscriberKit subscriberKit)` methods of the
 SubscriberKit.StreamListener interface (defined in the OpenTok Android SDK):
 
 ```java
