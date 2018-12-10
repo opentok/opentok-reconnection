@@ -66,7 +66,7 @@ Now we will add a second client to the session:
    feedback.
 
 2. Disconnect the internet connection on the second device/client while keeping the original 
-   first device connected to the debug console. From the first client, you will now notice that
+   first device connected to the debug console. From the first client, after 30 seconds or so,  you will now notice that
    the message "Subscriber has been disconnected by connection error" has been logged to the 
    debug console.
 
