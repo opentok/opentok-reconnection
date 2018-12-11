@@ -7,9 +7,11 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
 - Attempt to automatically reconnect to the session if the client has disconnected due
   to a temporary drop in local network connectivity.
 
-- Attempt to automatically reconnect to a subscriber stream that is temporarily dropped , locally.
+- Attempt to automatically reconnect to a subscriber stream that is temporarily dropped locally.
 
-In both of the above cases, the callbacks are not indicative of the remote clients/publishers. The callbacks are indicative of what is happening on **your** network only (locally) . This distinction is made because it may sometime happen that your subscriber is dropped but the session connection is still active.
+In both of the above cases, the callbacks are not indicative of the remote clients/publishers.
+The callbacks are indicative of what is happening on **your** network only (locally). This distinction
+is made because sometimes your subscriber is dropped but the session connection is still active.
 
 - Upon a successful reconnection, automatically resend signals that are initiated
   by the client when it was temporarily disconnected. (For more information about Signaling,
@@ -54,11 +56,13 @@ To configure and try the sample code:
 
    The app displays an Android [ProgressDialog](http://developer.android.com/reference/android/app/ProgressDialog.html)
    with the message "Reconnecting. Please wait....". It also logs "Reconnecting to the session"
-   to the debug console. It will also display the message "Subscriber has been disconnected by connection error" for the subscriber.
+   to the debug console. It will also display the message "Subscriber has been disconnected by connection error"
+   for the subscriber.
 
 6. Enable internet access for your device, this time preferably on your mobile data network.
    Upon reconnecting to the OpenTok session, the app hides the ProgressDialog and logs
-   "Session has been reconnected" to the debug console. It will also display the message "Subscriber has been reconnected" for the subscriber.
+   "Session has been reconnected" to the debug console. It will also display the message "Subscriber has been reconnected"
+   for the subscriber.
 
 Finally, the sample code shows how to disable
 [OpenTok signaling](https://tokbox.com/developer/guides/signaling/android/) while reconnecting
