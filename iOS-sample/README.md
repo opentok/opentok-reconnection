@@ -7,9 +7,11 @@ Clients connected to sessions that use the Automatic Reconnection feature can do
 - Attempt to automatically reconnect to the session if the client has disconnected due
   to a temporary drop in local network connectivity.
 
-- Attempt to automatically reconnect to a subscriber stream that is temporarily dropped , locally.
+- Attempt to automatically reconnect to a subscriber stream that is temporarily dropped, locally.
 
-In both of the above cases, the callbacks are not indicative of the remote clients/publishers. The callbacks are indicative of what is happening on **your** network only (locally) . This distinction is made because it may sometime happen that your subscriber is dropped but the session connection is still active.
+In both of the above cases, the callbacks are not indicative of the remote clients/publishers.
+The callbacks are indicative of what is happening on **your** network only (locally). This distinction
+is made because sometimes your subscriber is dropped but the session connection is still active.
 
 - Upon a successful reconnection, automatically resend signals that are initiated
   by the client when it was temporarily disconnected. (For more information about Signaling,
@@ -37,11 +39,14 @@ pod install
 5. Disable the internet connection (both the Wi-Fi connection and any other
    network connection) on your debug device.
 
-   A reconnecting spinner icon is displayed in the app's subscriber view based on the subscriber callback, followed by an alert with the message "Session is reconnecting." for the session level callback.
+   A reconnecting spinner icon is displayed in the app's subscriber view
+   based on the subscriber callback, followed by an alert with the message
+   "Session is reconnecting." for the session level callback.
 
 6. Reconnect your device to the network.
 
-   Upon reconnecting to the OpenTok session, the app removes the alert and the reconnecting spinner icon from the subscriber view.
+   Upon reconnecting to the OpenTok session, the app removes the alert
+   and the reconnecting spinner icon from the subscriber view.
 
 Finally, the app shows how to disable
 [OpenTok signaling](https://tokbox.com/developer/guides/signaling/ios/) while reconnecting
