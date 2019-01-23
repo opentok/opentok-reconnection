@@ -20,6 +20,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.opentok.android:opentok-android-sdk:2.15.2'
+    implementation 'com.opentok.android:opentok-android-sdk:2.15.3'
     implementation 'com.android.support:appcompat-v7:23.1.0'
 }
